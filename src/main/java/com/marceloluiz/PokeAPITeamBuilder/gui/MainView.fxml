@@ -6,6 +6,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
@@ -32,6 +33,9 @@
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
+               <image>
+                  <Image url="file:assets/img/pokemonPokeball.png" />
+               </image>
             </ImageView>
             <Button fx:id="teamBuilderBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBtnTeamBuilderAction" text="Team Builder">
                <VBox.margin>

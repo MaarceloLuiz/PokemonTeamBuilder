@@ -31,7 +31,7 @@ public class MainViewController implements Initializable{
 	private Button closeBtn;
 	
 	@FXML
-	private ImageView logoImg;
+	private ImageView logoImg; //using "file:*filepath*" instead of "@*filepath*" makes the img show up in JavaFX
 
 	@FXML
 	public void onMenuItemPokedexAction() {
