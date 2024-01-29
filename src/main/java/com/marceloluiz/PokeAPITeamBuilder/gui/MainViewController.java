@@ -5,7 +5,9 @@ import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Component;
 
+import com.marceloluiz.PokeAPITeamBuilder.models.PokeData;
 import com.marceloluiz.PokeAPITeamBuilder.services.APIConsumption;
+import com.marceloluiz.PokeAPITeamBuilder.services.ConvertData;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -59,9 +61,12 @@ public class MainViewController implements Initializable{
 		
 		//API class test
 		var apiConsumption = new APIConsumption();
-		var json = apiConsumption.gettingData("https://pokeapi.co/api/v2/pokemon?limit=10&offset=0");
+		var json = apiConsumption.gettingData("https://pokeapi.co/api/v2/pokemon/pikachu");
 		
-		System.out.println(json);
+		ConvertData convert = new ConvertData();
+		PokeData data = convert.getData(json, PokeData.class);
+		
+		System.out.println(data);
 	}
 
 	@FXML
