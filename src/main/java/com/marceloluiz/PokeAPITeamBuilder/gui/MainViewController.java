@@ -7,11 +7,13 @@ import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Component;
 
+import com.marceloluiz.PokeAPITeamBuilder.enums.PokeType;
 import com.marceloluiz.PokeAPITeamBuilder.models.PokeData;
-import com.marceloluiz.PokeAPITeamBuilder.models.PokeDataType;
 import com.marceloluiz.PokeAPITeamBuilder.services.APIConsumption;
 import com.marceloluiz.PokeAPITeamBuilder.services.ConvertData;
+import com.marceloluiz.PokeAPITeamBuilder.util.Utils;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -60,8 +62,6 @@ public class MainViewController implements Initializable{
 	
 	@FXML
 	public void onBtnPokedexAction() {
-		System.out.println("pokedex btn");
-		
 		//API class test
 		var apiConsumption = new APIConsumption();
 		var json = apiConsumption.gettingData("https://pokeapi.co/api/v2/pokemon/zekrom");
@@ -79,7 +79,7 @@ public class MainViewController implements Initializable{
 		String find = "";
 		List<Integer> type = new ArrayList<>();
 		
-		for(int i = 1; i<=18; i++) {
+		for(int i = 1; i <= PokeType.values().length; i++) {
 			find = "/type/" + i + "/";
 			found = testType.contains(find);
 			
@@ -90,17 +90,24 @@ public class MainViewController implements Initializable{
 		}
 
 		for(int typeNumber : type) {
-			var jsonTypeURL = apiConsumption.gettingData("https://pokeapi.co/api/v2/type/" + typeNumber + "/");
-			PokeDataType dataType = convert.getData(jsonTypeURL, PokeDataType.class);
+			System.out.println(PokeType.getById(typeNumber)); //instead of calling the api again, we can just use our Enum class
 			
-			System.out.println(dataType);
 		}
-			
+		
+//		PokeStats[] stats = new PokeStats[data.getStatsList().size()];
+//		for(int i = 0; i < data.getStatsList().size(); i++) {
+//			JsonNode stat = (JsonNode) data.getStatsList().get(i);
+//			stats[i] = new PokeStats(PokeStats.Stats.getById(i+1),
+//					stat.get("effort").asInt(),
+//					stat.get("base_stat").asInt());
+//		}
+//			
+//		System.out.println(stats);
 	}
 
 	@FXML
-	public void onBtnCloseAction() {
-		System.out.println("close btn");
+	public void onBtnCloseAction(ActionEvent event) {
+		Utils.currentStage(event).close();
 	}
 	
 //	@FXML

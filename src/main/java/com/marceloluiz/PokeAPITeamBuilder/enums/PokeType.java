@@ -33,4 +33,10 @@ public enum PokeType {
 		return id;
 	}
 
+	public static PokeType getById(Integer id) {
+		for(PokeType e : PokeType.values()) {
+			if(e.id == id) return e;
+		}
+		throw new IllegalArgumentException();
+	}
 }

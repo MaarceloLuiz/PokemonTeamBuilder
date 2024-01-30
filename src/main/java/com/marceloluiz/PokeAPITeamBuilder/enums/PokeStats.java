@@ -60,6 +60,20 @@ public class PokeStats {
 		public int getId() {
 			return id;
 		}
+		
+		public static Stats getById(Integer id) {
+			for(Stats e : Stats.values()) {
+				if(e.id == id) return e;
+			}
+			throw new IllegalArgumentException();
+		}
         
     }
+
+	@Override
+	public String toString() {
+		return "PokeStats [type=" + type + ", effort=" + effort + ", baseStat=" + baseStat + "]";
+	}
+	
+	
 }
