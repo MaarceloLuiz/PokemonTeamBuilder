@@ -1,11 +1,14 @@
 package com.marceloluiz.PokeAPITeamBuilder.gui;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Component;
 
 import com.marceloluiz.PokeAPITeamBuilder.models.PokeData;
+import com.marceloluiz.PokeAPITeamBuilder.models.PokeDataType;
 import com.marceloluiz.PokeAPITeamBuilder.services.APIConsumption;
 import com.marceloluiz.PokeAPITeamBuilder.services.ConvertData;
 
@@ -61,12 +64,38 @@ public class MainViewController implements Initializable{
 		
 		//API class test
 		var apiConsumption = new APIConsumption();
-		var json = apiConsumption.gettingData("https://pokeapi.co/api/v2/pokemon/pikachu");
+		var json = apiConsumption.gettingData("https://pokeapi.co/api/v2/pokemon/zekrom");
 		
 		ConvertData convert = new ConvertData();
 		PokeData data = convert.getData(json, PokeData.class);
 		
 		System.out.println(data);
+			
+		System.out.println("----------------type test ----------------");
+		
+		String testType = data.getTypeList().toString();
+		
+		boolean found;
+		String find = "";
+		List<Integer> type = new ArrayList<>();
+		
+		for(int i = 1; i<=18; i++) {
+			find = "/type/" + i + "/";
+			found = testType.contains(find);
+			
+			if(found == true) {
+				type.add(i);
+			}
+			
+		}
+
+		for(int typeNumber : type) {
+			var jsonTypeURL = apiConsumption.gettingData("https://pokeapi.co/api/v2/type/" + typeNumber + "/");
+			PokeDataType dataType = convert.getData(jsonTypeURL, PokeDataType.class);
+			
+			System.out.println(dataType);
+		}
+			
 	}
 
 	@FXML

@@ -1,7 +1,6 @@
 package com.marceloluiz.PokeAPITeamBuilder.models;
 
 import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -16,21 +15,21 @@ public class PokeData {
 	
 	private int id;
 	private String name;
-	private String type;
+	private List<Object> typeList;
 	private List<Object> statsList;
 	private String imageURL;
 	
 	public PokeData() {
 	}
 	
-	public PokeData(int id, String name, String type, List<Object> statsList, String imageURL) {
+	public PokeData(int id, String name, List<Object> typeList, List<Object> statsList, String imageURL) {
 		this.id = id;
 		this.name = name;
-		this.type = type;
+		this.typeList = typeList;
 		this.statsList = statsList;
 		this.imageURL = imageURL;
 	}
-	
+
 	@JsonAlias("id")
 	public int getId() {
 		return id;
@@ -47,15 +46,13 @@ public class PokeData {
 		this.name = name;
 	}
 	
-	//@JsonAlias("types")
-	public String getType() {
-		return type;
+	
+	@JsonAlias("types")
+	public List<Object> getTypeList() {
+		return typeList;
 	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
-	
+
 	@JsonAlias("stats")
 	public List<Object> getStatsList() {
 		return statsList;
@@ -69,15 +66,10 @@ public class PokeData {
 		this.imageURL = imageURL;
 	}
 	
-	
-	@JsonAlias("types")
-	private void unpackTypeFromNestedObject(Map<String, Object> type) {
-		this.type = (String) type.get("type");
-	}
 
 	@Override
 	public String toString() {
-		return "PokeData [id=" + id + ", name=" + name + ", type=" + type + ", statsList=" + statsList
+		return "PokeData [id=" + id + ", name=" + name + ", typeList=" + typeList + ", statsList=" + statsList
 				+ ", imageURL=" + imageURL + "]";
 	}
 }
