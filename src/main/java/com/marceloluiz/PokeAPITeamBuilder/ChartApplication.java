@@ -15,6 +15,8 @@ public class ChartApplication extends Application {
 
 	private ConfigurableApplicationContext applicationContext;
 	
+	private static Scene mainScene;
+	
 	private ScrollPane scrollPane;
 
 	@Override
@@ -24,7 +26,7 @@ public class ChartApplication extends Application {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("gui/MainView.fxml"));
 		loader.setControllerFactory(applicationContext::getBean);
 		
-		scrollPane = loader.load(); //ERROR 
+		scrollPane = loader.load();
 		scrollPane.setFitToHeight(true);
 		scrollPane.setFitToWidth(true);
 	}
@@ -33,9 +35,15 @@ public class ChartApplication extends Application {
 	public void start(Stage stage) throws Exception {
 		applicationContext.publishEvent(new StageReadyEvent(stage));
 		 
-		stage.setScene(new Scene(scrollPane));
+		mainScene = new Scene(scrollPane);
+		
+		stage.setScene(mainScene);
 		stage.setTitle("PokeAPI JavaFX application");
 		stage.show();
+	}
+	
+	public static Scene getMainScene() {
+		return mainScene;
 	}
 
 	@Override

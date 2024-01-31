@@ -1,0 +1,167 @@
+package com.marceloluiz.PokeAPITeamBuilder.model.dao.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.marceloluiz.PokeAPITeamBuilder.db.DB;
+import com.marceloluiz.PokeAPITeamBuilder.db.DbException;
+import com.marceloluiz.PokeAPITeamBuilder.model.dao.PokemonDao;
+import com.marceloluiz.PokeAPITeamBuilder.models.entities.Pokemon;
+
+public class PokemonDaoJDBC implements PokemonDao {
+	
+	private Connection conn;
+	
+	public PokemonDaoJDBC(Connection conn) {
+		this.conn = conn;
+	}
+
+	@Override
+	public void insert(Pokemon obj) {
+		PreparedStatement st = null;
+		
+		try {
+			st = conn.prepareStatement(
+					"INSERT INTO pokemon "
+					+ "(PokemonId, PokeImageUrl, PokeName, PokeType, HP, Attack, Defense, SpecialAttack, SpecialDefense, Speed, Accuracy, Evasion) "
+					+ "VALUES "
+					+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+					Statement.RETURN_GENERATED_KEYS);
+			
+			//we don't need the 'getPokeID()', because its gonna be filled automatically
+			//st.setInt(1, obj.getPokeID());
+			st.setString(1, obj.getPokeName());
+			
+			int rowsAffected = st.executeUpdate();
+			
+			if(rowsAffected > 0) {
+				ResultSet rs = st.getGeneratedKeys();
+				if(rs.next()) {
+					int id = rs.getInt(1);
+					obj.setPokeID(id);
+				}
+				DB.closeResultSet(rs);
+			}
+			else {
+				throw new DbException("Unexpected error! No rows affected!");
+			}
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
+
+	}
+
+	@Override
+	public void update(Pokemon obj) {
+//		PreparedStatement st = null;
+//		
+//		try {
+//			st = conn.prepareStatement(
+//					"UPDATE pokemon "
+//					+ "SET PokeName = ? "
+//					+ "WHERE PokemonId = ?");
+//			
+//			st.setString(1, obj.getPokeName());
+//			st.setInt(2, obj.getPokeID());
+//			
+//			st.executeUpdate();
+//		}
+//		catch(SQLException e) {
+//			throw new DbException(e.getMessage());
+//		}
+//		finally {
+//			DB.closeStatement(st);
+//		}
+
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		PreparedStatement st = null;
+		
+		try {
+			st = conn.prepareStatement("DELETE FROM pokemon WHERE PokemonId = ?");
+			
+			st.setInt(1, id);
+			
+			st.executeUpdate();
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
+	}
+
+	@Override
+	public Pokemon findById(Integer id) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		
+		try {
+			st = conn.prepareStatement("SELECT * FROM pokemon WHERE PokemonId = ?");
+			
+			st.setInt(1, id);
+			
+			rs = st.executeQuery();
+			
+			if(rs.next()) {
+				Pokemon poke = new Pokemon();
+				poke.setPokeID(rs.getInt("PokemonId"));
+				poke.setPokeName(rs.getString("PokeName"));
+				
+				return poke;
+			}
+			return null;
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+	}
+
+	@Override
+	public List<Pokemon> findAll() {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		
+		try {
+			st = conn.prepareStatement("SELECT * FROM pokemon ORDER BY PokemonId");
+			
+			rs = st.executeQuery();
+			
+			List<Pokemon> list = new ArrayList<>();
+			
+			while(rs.next()) {
+				Pokemon poke = new Pokemon();
+				poke.setPokeID(rs.getInt("PokemonId"));
+				poke.setPokeName(rs.getString("PokeName"));
+				
+				list.add(poke);
+			}
+			return list;
+			
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+	}
+
+}
