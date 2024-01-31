@@ -29,7 +29,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -189,9 +188,7 @@ public class MainViewController implements Initializable{
 			Scene mainScene = ChartApplication.getMainScene();
 			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
 
-			Node mainMenu = mainVBox.getChildren().get(0); // getting the main menu (position 0)
 			mainVBox.getChildren().clear();
-			mainVBox.getChildren().add(mainMenu);
 			mainVBox.getChildren().addAll(newVBox.getChildren());
 			
 			T controller = loader.getController();
