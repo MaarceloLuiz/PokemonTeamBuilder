@@ -1,25 +1,25 @@
-package com.marceloluiz.PokeAPITeamBuilder.enums;
+package com.marceloluiz.PokeAPITeamBuilder.models;
 
 public class PokeStats {
 	
-    private Stats type;
+    private Stats stat;
     private int baseStat;
 
     public PokeStats() {
     }
     
-    public PokeStats(Stats type, int baseStat) {
-		this.type = type;
+    public PokeStats(Stats stat, int baseStat) {
+		this.stat = stat;
 		this.baseStat = baseStat;
 	}
     
 
 	public Stats getType() {
-		return type;
+		return stat;
 	}
 
 	public void setType(Stats type) {
-		this.type = type;
+		this.stat = type;
 	}
 
 
@@ -63,7 +63,7 @@ public class PokeStats {
 
 	@Override
 	public String toString() {
-		return "PokeStats [type=" + type + ", baseStat=" + baseStat + "]";
+		return "PokeStats [stat=" + stat + ", baseStat=" + baseStat + "]";
 	}
 	
 }

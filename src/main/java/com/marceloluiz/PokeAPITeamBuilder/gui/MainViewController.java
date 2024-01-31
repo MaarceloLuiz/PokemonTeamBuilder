@@ -11,9 +11,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.marceloluiz.PokeAPITeamBuilder.enums.PokeStats;
 import com.marceloluiz.PokeAPITeamBuilder.enums.PokeType;
 import com.marceloluiz.PokeAPITeamBuilder.models.PokeData;
+import com.marceloluiz.PokeAPITeamBuilder.models.PokeSprite;
+import com.marceloluiz.PokeAPITeamBuilder.models.PokeStats;
+import com.marceloluiz.PokeAPITeamBuilder.models.PokeSprite.Sprites;
 import com.marceloluiz.PokeAPITeamBuilder.services.APIConsumption;
 import com.marceloluiz.PokeAPITeamBuilder.services.ConvertData;
 import com.marceloluiz.PokeAPITeamBuilder.util.Utils;
@@ -127,6 +129,32 @@ public class MainViewController implements Initializable{
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println("----------------sprites test ----------------");
+		
+		PokeSprite[] sprites = new PokeSprite[PokeSprite.Sprites.values().length];
+		
+		try {
+			
+			jsonNode = mapper.readTree(json);
+			JsonNode spritesObject = jsonNode.get("sprites");
+			
+			for(int i = 0; i < PokeSprite.Sprites.values().length; i++) {
+				PokeSprite.Sprites typeSprites = Sprites.values()[i];
+				JsonNode urlNode = spritesObject.get(typeSprites.name().toLowerCase());
+				sprites[i] = new PokeSprite(typeSprites, urlNode.isNull() ? null : urlNode.toString());
+				
+			}
+			
+			for(PokeSprite sprite : sprites) {
+				System.out.println(sprite);
+			}
+			
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}	
 		
 	}
 
