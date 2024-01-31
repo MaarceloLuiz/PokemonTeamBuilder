@@ -7,6 +7,11 @@ import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.marceloluiz.PokeAPITeamBuilder.enums.PokeStats;
 import com.marceloluiz.PokeAPITeamBuilder.enums.PokeType;
 import com.marceloluiz.PokeAPITeamBuilder.models.PokeData;
 import com.marceloluiz.PokeAPITeamBuilder.services.APIConsumption;
@@ -64,7 +69,7 @@ public class MainViewController implements Initializable{
 	public void onBtnPokedexAction() {
 		//API class test
 		var apiConsumption = new APIConsumption();
-		var json = apiConsumption.gettingData("https://pokeapi.co/api/v2/pokemon/zekrom");
+		var json = apiConsumption.gettingData("https://pokeapi.co/api/v2/pokemon/lucario");
 		
 		ConvertData convert = new ConvertData();
 		PokeData data = convert.getData(json, PokeData.class);
@@ -94,15 +99,35 @@ public class MainViewController implements Initializable{
 			
 		}
 		
-//		PokeStats[] stats = new PokeStats[data.getStatsList().size()];
-//		for(int i = 0; i < data.getStatsList().size(); i++) {
-//			JsonNode stat = (JsonNode) data.getStatsList().get(i);
-//			stats[i] = new PokeStats(PokeStats.Stats.getById(i+1),
-//					stat.get("effort").asInt(),
-//					stat.get("base_stat").asInt());
-//		}
-//			
-//		System.out.println(stats);
+		System.out.println("----------------status test ----------------");
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		JsonNode jsonNode;
+		
+		try {
+				
+			jsonNode = mapper.readTree(json);
+			JsonNode statsArray = jsonNode.get("stats");
+			
+			PokeStats[] stats = new PokeStats[statsArray.size()];
+			
+			for(int i = 0; i < statsArray.size(); i++) {
+				JsonNode stat = statsArray.get(i);
+				stats[i] = new PokeStats(PokeStats.Stats.getById(i+1),
+						stat.get("base_stat").asInt());
+			}
+			
+			for(PokeStats stat : stats) {
+				System.out.println(stat);
+			}
+				
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@FXML

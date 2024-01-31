@@ -3,15 +3,13 @@ package com.marceloluiz.PokeAPITeamBuilder.enums;
 public class PokeStats {
 	
     private Stats type;
-    private int effort;
     private int baseStat;
 
     public PokeStats() {
     }
     
-    public PokeStats(Stats type, int effort, int baseStat) {
+    public PokeStats(Stats type, int baseStat) {
 		this.type = type;
-		this.effort = effort;
 		this.baseStat = baseStat;
 	}
     
@@ -24,13 +22,6 @@ public class PokeStats {
 		this.type = type;
 	}
 
-	public int getEffort() {
-		return effort;
-	}
-
-	public void setEffort(int effort) {
-		this.effort = effort;
-	}
 
 	public int getBaseStat() {
 		return baseStat;
@@ -72,8 +63,7 @@ public class PokeStats {
 
 	@Override
 	public String toString() {
-		return "PokeStats [type=" + type + ", effort=" + effort + ", baseStat=" + baseStat + "]";
+		return "PokeStats [type=" + type + ", baseStat=" + baseStat + "]";
 	}
-	
 	
 }
