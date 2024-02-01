@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.marceloluiz.PokeAPITeamBuilder.gui.TeamBuilderController">
+   <children>
+      <TableView fx:id="tableViewTeamBuilder" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Test" />
+          <TableColumn prefWidth="75.0" text="Test2" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>

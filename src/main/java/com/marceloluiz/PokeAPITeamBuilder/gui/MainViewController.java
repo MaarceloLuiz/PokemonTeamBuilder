@@ -74,100 +74,102 @@ public class MainViewController implements Initializable{
 
 	@FXML
 	public void onBtnTeamBuilderAction() {
-		//API class test
-				var apiConsumption = new APIConsumption();
-				var json = apiConsumption.gettingData("https://pokeapi.co/api/v2/pokemon/lucario");
-				
-				ConvertData convert = new ConvertData();
-				PokeData data = convert.getData(json, PokeData.class);
-				
-				System.out.println(data);
-					
-				System.out.println("----------------type test ----------------");
-				
-				String testType = data.getTypeList().toString();
-				
-				boolean found;
-				String find = "";
-				List<Integer> type = new ArrayList<>();
-				
-				for(int i = 1; i <= PokeType.values().length; i++) {
-					find = "/type/" + i + "/";
-					found = testType.contains(find);
-					
-					if(found == true) {
-						type.add(i);
-					}
-					
-				}
-
-				for(int typeNumber : type) {
-					System.out.println(PokeType.getById(typeNumber)); //instead of calling the api again, we can just use our Enum class
-					
-				}
-				
-				System.out.println("----------------status test ----------------");
-				
-				ObjectMapper mapper = new ObjectMapper();
-				
-				JsonNode jsonNode;
-				
-				try {
-						
-					jsonNode = mapper.readTree(json);
-					JsonNode statsArray = jsonNode.get("stats");
-					
-					PokeStats[] stats = new PokeStats[statsArray.size()];
-					
-					for(int i = 0; i < statsArray.size(); i++) {
-						JsonNode stat = statsArray.get(i);
-						stats[i] = new PokeStats(PokeStats.Stats.getById(i+1),
-								stat.get("base_stat").asInt());
-					}
-					
-					for(PokeStats stat : stats) {
-						System.out.println(stat);
-					}
-						
-				} catch (JsonMappingException e) {
-					e.printStackTrace();
-				} catch (JsonProcessingException e) {
-					e.printStackTrace();
-				}
-				
-				System.out.println("----------------sprites test ----------------");
-				
-				PokeSprite[] sprites = new PokeSprite[PokeSprite.Sprites.values().length];
-				
-				try {
-					
-					jsonNode = mapper.readTree(json);
-					JsonNode spritesObject = jsonNode.get("sprites");
-					
-					for(int i = 0; i < PokeSprite.Sprites.values().length; i++) {
-						PokeSprite.Sprites typeSprites = Sprites.values()[i];
-						JsonNode urlNode = spritesObject.get(typeSprites.name().toLowerCase());
-						sprites[i] = new PokeSprite(typeSprites, urlNode.isNull() ? null : urlNode.toString());
-						
-					}
-					
-					for(PokeSprite sprite : sprites) {
-						System.out.println(sprite);
-					}
-					
-				} catch (JsonMappingException e) {
-					e.printStackTrace();
-				} catch (JsonProcessingException e) {
-					e.printStackTrace();
-				}
+		loadView("../gui/TeamBuilder.fxml", (TeamBuilderController controller) -> {
+			controller.setPokemonService(new PokemonService());
+			controller.updateTableView();
+		});
 	}
 	
 	@FXML
 	public void onBtnPokedexAction() {
-			loadView("../gui/Pokedex.fxml", (PokedexController controller) -> {;
-				controller.setPokemonService(new PokemonService());
-				controller.updateTableView();
-			});
+		loadView("../gui/Pokedex.fxml", x -> {});
+		
+		//API class test
+		var apiConsumption = new APIConsumption();
+		var json = apiConsumption.gettingData("https://pokeapi.co/api/v2/pokemon/lucario");
+		
+		ConvertData convert = new ConvertData();
+		PokeData data = convert.getData(json, PokeData.class);
+		
+		System.out.println(data);
+			
+		System.out.println("----------------type test ----------------");
+		
+		String testType = data.getTypeList().toString();
+		
+		boolean found;
+		String find = "";
+		List<Integer> type = new ArrayList<>();
+		
+		for(int i = 1; i <= PokeType.values().length; i++) {
+			find = "/type/" + i + "/";
+			found = testType.contains(find);
+			
+			if(found == true) {
+				type.add(i);
+			}
+			
+		}
+	
+		for(int typeNumber : type) {
+			System.out.println(PokeType.getById(typeNumber)); //instead of calling the api again, we can just use our Enum class
+			
+		}
+		
+		System.out.println("----------------status test ----------------");
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		JsonNode jsonNode;
+		
+		try {
+				
+			jsonNode = mapper.readTree(json);
+			JsonNode statsArray = jsonNode.get("stats");
+			
+			PokeStats[] stats = new PokeStats[statsArray.size()];
+			
+			for(int i = 0; i < statsArray.size(); i++) {
+				JsonNode stat = statsArray.get(i);
+				stats[i] = new PokeStats(PokeStats.Stats.getById(i+1),
+						stat.get("base_stat").asInt());
+			}
+			
+			for(PokeStats stat : stats) {
+				System.out.println(stat);
+			}
+				
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("----------------sprites test ----------------");
+		
+		PokeSprite[] sprites = new PokeSprite[PokeSprite.Sprites.values().length];
+		
+		try {
+			
+			jsonNode = mapper.readTree(json);
+			JsonNode spritesObject = jsonNode.get("sprites");
+			
+			for(int i = 0; i < PokeSprite.Sprites.values().length; i++) {
+				PokeSprite.Sprites typeSprites = Sprites.values()[i];
+				JsonNode urlNode = spritesObject.get(typeSprites.name().toLowerCase());
+				sprites[i] = new PokeSprite(typeSprites, urlNode.isNull() ? null : urlNode.toString());
+				
+			}
+			
+			for(PokeSprite sprite : sprites) {
+				System.out.println(sprite);
+			}
+			
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML

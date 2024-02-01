@@ -33,9 +33,18 @@ public class PokemonDaoJDBC implements PokemonDao {
 					+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 					Statement.RETURN_GENERATED_KEYS);
 			
-			//we don't need the 'getPokeID()', because its gonna be filled automatically
-			//st.setInt(1, obj.getPokeID());
-			st.setString(1, obj.getPokeName());
+			st.setInt(1, obj.getPokeID());
+			st.setString(2, obj.getPokeSprites()[0].toString());
+			st.setString(3, obj.getPokeName());
+			st.setString(4, obj.getPokeType().toString());
+			st.setString(5, obj.getPokeStatus()[0].toString());
+			st.setString(6, obj.getPokeStatus()[1].toString());
+			st.setString(7, obj.getPokeStatus()[2].toString());
+			st.setString(8, obj.getPokeStatus()[3].toString());
+			st.setString(9, obj.getPokeStatus()[4].toString());
+			st.setString(10, obj.getPokeStatus()[5].toString());
+			st.setString(11, obj.getPokeStatus()[6].toString());
+			st.setString(12, obj.getPokeStatus()[7].toString());
 			
 			int rowsAffected = st.executeUpdate();
 			
