@@ -5,56 +5,162 @@ import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Component;
 
-import com.marceloluiz.PokeAPITeamBuilder.ChartApplication;
-import com.marceloluiz.PokeAPITeamBuilder.models.entities.Pokemon;
+import com.marceloluiz.PokeAPITeamBuilder.util.Constraints;
+import com.marceloluiz.PokeAPITeamBuilder.util.Utils;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
 
 @Component
 public class PokedexController implements Initializable{
 	
 	@FXML
-	private TextField pokeSearch;
+	private Button rightArrowBtn;
 	@FXML
-	private Button searchBtn;
-
+	private Button leftArrowBtn;
 	@FXML
-	private TableView<Pokemon> tableViewPokedex;
-	@FXML
-	private ImageView pokeImage;
-	@FXML
-	private TableColumn<Pokemon, Integer> tableColumnID;
-	@FXML
-	private TableColumn<Pokemon, String> tableColumnName;
-	@FXML
-	private TableColumn<Pokemon, Integer> tableColumnType;
+	private Button startBtn;
 	
 	@FXML
-	private ProgressBar statsProgressBar;
+	private Pane paneBg;
+	
+	@FXML
+	private ImageView photoFrame;
+	
+	@FXML
+	private Button closeBtn;
+	
+	@FXML
+	private ImageView typeOneImg;
+	@FXML
+	private ImageView typeTwoImg;
+	
+	@FXML
+	private Label weaknessesTitleLabel;
+	@FXML
+	private Label weaknessesOneLabel;
+	@FXML
+	private Label weaknessesTwoLabel;
+	@FXML
+	private Label weaknessesThreeLabel;
+	@FXML
+	private Label weaknessesFourLabel;
+	@FXML
+	private Label weaknessesFiveLabel;
+	@FXML
+	private Label weaknessesSixLabel;
+	
+	@FXML
+	private ImageView weaknessesOneImg;
+	@FXML
+	private ImageView weaknessesTwoImg;
+	@FXML
+	private ImageView weaknessesThreeImg;
+	@FXML
+	private ImageView weaknessesFourImg;
+	@FXML
+	private ImageView weaknessesFiveImg;
+	@FXML
+	private ImageView weaknessesSixImg;
+	@FXML
+	private ImageView regionImg;
+	
+	@FXML
+	private Label regionLabel;
+	@FXML
+	private Label generationLabel;
+	
+	@FXML
+	private Button shinyBtn;
+	
+	@FXML
+	private Label nameLabel;
+	@FXML
+	private Label numberLabel;
+	@FXML
+	private Label typeOneLabel;
+	@FXML
+	private Label typeTwoLabel;
+	
+	@FXML
+	private Label heightTxt;
+	@FXML
+	private Label weightTxt;
+	@FXML
+	private Label categoryTxt;
+	@FXML
+	private Label genderTxt;
+	@FXML
+	private Label heightLabel;
+	@FXML
+	private Label genderLabel;
+	@FXML
+	private Label weightLabel;
+	@FXML
+	private Label categoryLabel;
+	
+	@FXML
+	private TextField searchTxt;
+	
+	@FXML
+	private Button searchBtn;
+	
+	@FXML
+	private Button infoBtn;
+	
+	@FXML
+	private ImageView startImg;
+	@FXML
+	private ImageView closeImg;
+	
+	@FXML
+	public void onActionRightArrowBtn() {
+		System.out.println("rightArrowBtn");
+	}
+	@FXML
+	public void onActionLeftArrowBtn() {
+		System.out.println("leftArrowBtn");
+	}
+	
+	@FXML
+	public void onActionStartBtn(ActionEvent event) {
+		System.out.println("startBtn");
+	}
 	
 	@FXML
 	private void onActionSearchBtn() {
 		System.out.println("searchBtn");
 	}
+	
+	@FXML
+	private void onActionShinyBtn() {
+		System.out.println("shinyBtn");
+	}
+	
+	@FXML
+	private void onActionInfoBtn() {
+		System.out.println("infoBtn");
+	}
+	
+	@FXML
+	public void onBtnCloseAction(ActionEvent event) {
+		Utils.currentStage(event).close();
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		initializeNodes();
+		initializeNodes();	
 	}
 	
 	
 	private void initializeNodes() {
-		Stage stage = (Stage) ChartApplication.getMainScene().getWindow();
-		tableViewPokedex.prefHeightProperty().bind(stage.heightProperty());
-		tableViewPokedex.prefHeightProperty().bind(stage.widthProperty());
+		Constraints.setTextFieldNumericOnly(searchTxt);
 		
 	}
 }

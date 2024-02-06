@@ -1,0 +1,27 @@
+/* 
+	JavaFX layout idea by user:ViictorP
+*/
+
+#closeBtn{
+    -fx-background-radius: 150;
+    -fx-pref-width: 37;
+    -fx-pref-height: 37;
+    -fx-background-color: #00acfa;
+}
+#closeBtn:hover {
+    -fx-border-radius: 150;
+    -fx-border-color: #000000;
+    -fx-border-width: 2px;
+}
+#startBtn {
+    -fx-background-radius: 150;
+    -fx-pref-width: 37;
+    -fx-pref-height: 37;
+    -fx-background-color: #00acfa;
+}
+#startBtn:hover {
+    -fx-border-radius: 150;
+    -fx-border-color: #000000;
+    -fx-border-width: 2px;
+}
+

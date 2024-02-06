@@ -3,6 +3,7 @@ package com.marceloluiz.PokeAPITeamBuilder.gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
@@ -13,7 +14,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.marceloluiz.PokeAPITeamBuilder.ChartApplication;
 import com.marceloluiz.PokeAPITeamBuilder.enums.PokeType;
 import com.marceloluiz.PokeAPITeamBuilder.models.PokeData;
 import com.marceloluiz.PokeAPITeamBuilder.models.PokeSprite;
@@ -29,13 +29,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 @Component
 public class MainViewController implements Initializable{
@@ -74,7 +74,7 @@ public class MainViewController implements Initializable{
 
 	@FXML
 	public void onBtnTeamBuilderAction() {
-		loadView("../gui/TeamBuilder.fxml", (TeamBuilderController controller) -> {
+		loadView("../gui/TeamBuilder.fxml", "TeamBuilderView", (TeamBuilderController controller) -> {
 			controller.setPokemonService(new PokemonService());
 			controller.updateTableView();
 		});
@@ -82,7 +82,7 @@ public class MainViewController implements Initializable{
 	
 	@FXML
 	public void onBtnPokedexAction() {
-		loadView("../gui/Pokedex.fxml", x -> {});
+		loadView("../gui/Pokedex.fxml", "PokedexView", x -> {});
 		
 		//API class test
 		var apiConsumption = new APIConsumption();
@@ -110,10 +110,25 @@ public class MainViewController implements Initializable{
 			}
 			
 		}
-	
+		
+		
+		int typeCount = 0;
 		for(int typeNumber : type) {
+			if(typeCount == 0) System.out.println("First Type: ");
+			else if(typeCount == 1) {
+				System.out.println();
+				System.out.println("Second Type");
+			}
+			
 			System.out.println(PokeType.getById(typeNumber)); //instead of calling the api again, we can just use our Enum class
 			
+			//testing weakness
+			System.out.println();
+			System.out.println("Weakness: ");
+			
+			Arrays.stream(PokeType.getById(typeNumber).weak).forEach(System.out::println);
+								
+			typeCount++;
 		}
 		
 		System.out.println("----------------status test ----------------");
@@ -182,17 +197,25 @@ public class MainViewController implements Initializable{
 	public void initialize(URL uri, ResourceBundle rb) {
 	}
 	
-	private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
+	private synchronized <T> void loadView(String absoluteName, String title, Consumer<T> initializingAction) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-			VBox newVBox = loader.load();
-
-			Scene mainScene = ChartApplication.getMainScene();
-			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
-
-			mainVBox.getChildren().clear();
-			mainVBox.getChildren().addAll(newVBox.getChildren());
+			Parent root = (Parent) loader.load();
 			
+			Stage stage = new Stage();
+			
+			stage.setTitle(title);
+			stage.setScene(new Scene(root));
+			stage.show();
+			
+//			VBox newVBox = loader.load();
+//
+//			Scene mainScene = ChartApplication.getMainScene();
+//			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
+//
+//			mainVBox.getChildren().clear();
+//			mainVBox.getChildren().addAll(newVBox.getChildren());
+//			
 			T controller = loader.getController();
 			initializingAction.accept(controller);
 			
