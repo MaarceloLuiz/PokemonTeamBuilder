@@ -10,29 +10,31 @@ public class PokemonPokedex {
     private int id; //number label
     private String name;
     private String image;
+    private String shinyImg;
     private List<PokeType> pokeType;
     private List<PokeStats> stats;
-    private List<String> weaknesses;
+    private List<PokeType> weaknesses;
     private int generation;
-    private String shiny;
     private String height;
     private String weight;
+    private String region;
     
     public PokemonPokedex() {
     }
 
-	public PokemonPokedex(int id, String name, String image, List<PokeType> pokeType, List<PokeStats> stats,
-			List<String> weaknesses, int generation, String shiny, String height, String weight) {
+	public PokemonPokedex(int id, String name, String image, String shinyImg, List<PokeType> pokeType,
+			List<PokeStats> stats, List<PokeType> weaknesses, int generation, String height, String weight, String region) {
 		this.id = id;
 		this.name = name;
 		this.image = image;
+		this.shinyImg = shinyImg;
 		this.pokeType = pokeType;
 		this.stats = stats;
 		this.weaknesses = weaknesses;
 		this.generation = generation;
-		this.shiny = shiny;
 		this.height = height;
 		this.weight = weight;
+		this.region = region;
 	}
 
 	public int getId() {
@@ -67,7 +69,7 @@ public class PokemonPokedex {
 		return stats;
 	}
 
-	public List<String> getWeaknesses() {
+	public List<PokeType> getWeaknesses() {
 		return weaknesses;
 	}
 
@@ -79,12 +81,12 @@ public class PokemonPokedex {
 		this.generation = generation;
 	}
 
-	public String getShiny() {
-		return shiny;
+	public String getShinyImg() {
+		return shinyImg;
 	}
 
-	public void setShiny(String shiny) {
-		this.shiny = shiny;
+	public void setShinyImg(String shinyImg) {
+		this.shinyImg = shinyImg;
 	}
 
 	public String getHeight() {
@@ -102,18 +104,28 @@ public class PokemonPokedex {
 	public void setWeight(String weight) {
 		this.weight = weight;
 	}
+	
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
 
 	@Override
 	public String toString() {
 		return "PokemonPokedex [id=" + id
-				+ ", name=" + name
-				+ ", image=" + image
-				+ ", pokeType=" + pokeType
-				+ ", stats=" + stats
-				+ ", weaknesses=" + weaknesses
-				+ ", generation=" + generation
-				+ ", shiny=" + shiny
-				+ ", height=" + height
-				+ ", weight=" + weight + "]";
-	}  
+				+ ", \nname=" + name
+				+ ", \nimage=" + image
+				+ ", \nshinyImg=" + shinyImg
+				+ ", \npokeType=" + pokeType
+				+ ", \nstats=" + stats
+				+ ", \nweaknesses=" + weaknesses
+				+ ", \ngeneration=" + generation
+				+ ", \nheight=" + height
+				+ ", \nweight=" + weight
+				+ ", \nregion=" + region + "]";
+	}
+
 }

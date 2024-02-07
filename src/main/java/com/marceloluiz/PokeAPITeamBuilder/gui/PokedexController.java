@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Component;
 
+import com.marceloluiz.PokeAPITeamBuilder.models.entities.PokemonPokedex;
 import com.marceloluiz.PokeAPITeamBuilder.services.PokemonPokedexDeserializer;
 import com.marceloluiz.PokeAPITeamBuilder.util.Constraints;
 import com.marceloluiz.PokeAPITeamBuilder.util.Utils;
@@ -120,6 +121,9 @@ public class PokedexController implements Initializable{
 	@FXML
 	private Button statsBtn;
 	
+	//non JavaFx controlls
+	private PokemonPokedex pokemon;
+	
 	
 	@FXML
 	public void onActionRightArrowBtn() {
@@ -135,15 +139,9 @@ public class PokedexController implements Initializable{
 		initializeControls();
 		
 		var pokemonPokedexDeserializer = new PokemonPokedexDeserializer();
-		System.out.println();
-		System.out.println("types:");
-		pokemonPokedexDeserializer.getTypes().forEach(System.out::println);
-		System.out.println();
-		System.out.println("stats:");
-		pokemonPokedexDeserializer.getStats().forEach(System.out::println);
-		System.out.println();
-		System.out.println("sprites:");
-		pokemonPokedexDeserializer.getSprites().forEach(System.out::println);
+		pokemonPokedexDeserializer.setJson(448);
+		
+		System.out.println(pokemonPokedexDeserializer.createPokemon(pokemon).toString());
 	}
 	
 	@FXML
