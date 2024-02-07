@@ -1,8 +1,8 @@
 package com.marceloluiz.PokeAPITeamBuilder.models.entities;
 
-import com.marceloluiz.PokeAPITeamBuilder.enums.PokeType;
 import com.marceloluiz.PokeAPITeamBuilder.models.PokeSprite;
 import com.marceloluiz.PokeAPITeamBuilder.models.PokeStats;
+import com.marceloluiz.PokeAPITeamBuilder.models.enums.PokeType;
 
 public class Pokemon {
 	private Integer pokeID;

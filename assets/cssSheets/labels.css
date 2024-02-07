@@ -61,10 +61,12 @@
     -fx-alignment: center;
     -fx-font-size: 15;
 }
+/*
 #categoryTxt {
     -fx-alignment: center;
     -fx-font-size: 15;
 }
+*/
 #heightLabel {
     -fx-alignment: center;
     -fx-font-size: 15;
@@ -77,10 +79,12 @@
     -fx-alignment: center;
     -fx-font-size: 15;
 }
+/* 
 #categoryLabel {
     -fx-alignment: center;
     -fx-font-size: 15;
 }
+*/
 .text-field {
     -fx-background-color: transparent;
     -fx-text-fill: White;
@@ -102,7 +106,7 @@
 #moveLabelTutorial {
     -fx-alignment: center;
     -fx-font-size: 16;
-}  */
+}  
 #shinyLabelTutorial {
     -fx-alignment: center;
     -fx-font-size: 15;
@@ -111,3 +115,4 @@
     -fx-alignment: center;
     -fx-font-size: 14;
 }
+*/

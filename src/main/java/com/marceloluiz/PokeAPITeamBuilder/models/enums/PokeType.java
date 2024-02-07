@@ -1,4 +1,4 @@
-package com.marceloluiz.PokeAPITeamBuilder.enums;
+package com.marceloluiz.PokeAPITeamBuilder.models.enums;
 
 public enum PokeType {
 	

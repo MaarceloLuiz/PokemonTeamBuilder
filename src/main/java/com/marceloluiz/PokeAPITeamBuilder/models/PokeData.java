@@ -11,14 +11,18 @@ public class PokeData {
 	private int id;
 	private String name;
 	private List<Object> typeList;
+	private String height;
+    private String weight;
 	
 	public PokeData() {
 	}
 	
-	public PokeData(int id, String name, List<Object> typeList, List<Object> statsList, String imageURL) {
+	public PokeData(int id, String name, List<Object> typeList, String height, String weight) {
 		this.id = id;
 		this.name = name;
 		this.typeList = typeList;
+		this.height = height;
+		this.weight = weight;
 	}
 
 	@JsonAlias("id")
@@ -42,9 +46,31 @@ public class PokeData {
 		return typeList;
 	}
 	
+	@JsonAlias("height")
+	public String getHeight() {
+		return height;
+	}
+
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+	@JsonAlias("weight")
+	public String getWeight() {
+		return weight;
+	}
+
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+
 	@Override
 	public String toString() {
-		return "PokeData [id=" + id + ", name=" + name + ", typeList=" + typeList + "]";
+		return "PokeData [id=" + id
+				+ ", name=" + name
+				+ ", typeList=" + typeList
+				+ ", height=" + height
+				+ ", weight=" + weight + "]";
 	}
 
 }

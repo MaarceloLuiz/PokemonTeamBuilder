@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Component;
 
+import com.marceloluiz.PokeAPITeamBuilder.services.PokemonPokedexDeserializer;
 import com.marceloluiz.PokeAPITeamBuilder.util.Constraints;
 import com.marceloluiz.PokeAPITeamBuilder.util.Utils;
 
@@ -20,6 +21,7 @@ import javafx.scene.layout.Pane;
 @Component
 public class PokedexController implements Initializable{
 	
+	//FXML Controls
 	@FXML
 	private Button rightArrowBtn;
 	@FXML
@@ -93,8 +95,6 @@ public class PokedexController implements Initializable{
 	@FXML
 	private Label weightTxt;
 	@FXML
-	private Label categoryTxt;
-	@FXML
 	private Label genderTxt;
 	@FXML
 	private Label heightLabel;
@@ -102,8 +102,6 @@ public class PokedexController implements Initializable{
 	private Label genderLabel;
 	@FXML
 	private Label weightLabel;
-	@FXML
-	private Label categoryLabel;
 	
 	@FXML
 	private TextField searchTxt;
@@ -120,6 +118,10 @@ public class PokedexController implements Initializable{
 	private ImageView closeImg;
 	
 	@FXML
+	private Button statsBtn;
+	
+	
+	@FXML
 	public void onActionRightArrowBtn() {
 		System.out.println("rightArrowBtn");
 	}
@@ -130,7 +132,18 @@ public class PokedexController implements Initializable{
 	
 	@FXML
 	public void onActionStartBtn(ActionEvent event) {
-		System.out.println("startBtn");
+		initializeControls();
+		
+		var pokemonPokedexDeserializer = new PokemonPokedexDeserializer();
+		System.out.println();
+		System.out.println("types:");
+		pokemonPokedexDeserializer.getTypes().forEach(System.out::println);
+		System.out.println();
+		System.out.println("stats:");
+		pokemonPokedexDeserializer.getStats().forEach(System.out::println);
+		System.out.println();
+		System.out.println("sprites:");
+		pokemonPokedexDeserializer.getSprites().forEach(System.out::println);
 	}
 	
 	@FXML
@@ -149,6 +162,11 @@ public class PokedexController implements Initializable{
 	}
 	
 	@FXML
+	private void onActionStatsBtn() {
+		System.out.println("statsBtn");
+	}
+	
+	@FXML
 	public void onBtnCloseAction(ActionEvent event) {
 		Utils.currentStage(event).close();
 	}
@@ -161,6 +179,29 @@ public class PokedexController implements Initializable{
 	
 	private void initializeNodes() {
 		Constraints.setTextFieldNumericOnly(searchTxt);
-		
+	}
+	
+	private void initializeControls() {
+		leftArrowBtn.setVisible(true);
+		rightArrowBtn.setVisible(true);
+		shinyBtn.setVisible(true);
+
+		regionImg.setVisible(true);
+
+        heightTxt.setVisible(true);
+        weightTxt.setVisible(true);
+        genderTxt.setVisible(true);
+        
+        weaknessesTitleLabel.setVisible(true);
+
+        searchBtn.setVisible(true);
+        searchTxt.setVisible(true);
+
+        closeBtn.setVisible(true);
+        startBtn.setVisible(false);
+        startImg.setVisible(false);
+        closeImg.setVisible(true);
+        
+        statsBtn.setVisible(true);
 	}
 }
