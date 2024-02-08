@@ -124,13 +124,12 @@ public class PokedexController implements Initializable{
 	
 	//non JavaFx controlls
 	private PokemonPokedexDeserializer pokemonPokedexDeserializer;
-	
 	private PokemonPokedex pokemon;
+	private boolean shinyOn = false;
 	
 	
 	@FXML
 	public void onActionRightArrowBtn() {
-		System.out.println("rightArrowBtn");
 		int index = pokemon.getId();
 		
 		if(pokemon.getId() == 1025) {
@@ -140,13 +139,15 @@ public class PokedexController implements Initializable{
 			pokemonPokedexDeserializer.setJson(index + 1);
 			pokemon = pokemonPokedexDeserializer.createPokemon(pokemon);
 			
+			shinyOn = false;
 			pokemonLabelUpdate();
 			pokemonImgUpdate();
+			
+			searchTxt.setText("0");
 		}
 	}
 	@FXML
 	public void onActionLeftArrowBtn() {
-		System.out.println("leftArrowBtn");
 		int index = pokemon.getId();
 		
 		if(pokemon.getId() == 1) {
@@ -156,8 +157,11 @@ public class PokedexController implements Initializable{
 			pokemonPokedexDeserializer.setJson(index - 1);
 			pokemon = pokemonPokedexDeserializer.createPokemon(pokemon);
 			
+			shinyOn = false;
 			pokemonLabelUpdate();
 			pokemonImgUpdate();
+			
+			searchTxt.setText("0");
 		}
 	}
 	
@@ -173,7 +177,7 @@ public class PokedexController implements Initializable{
 		pokemonImgUpdate();
 		pokemonLabelUpdate();
 		
-		System.out.println(pokemon.toString());
+//		System.out.println(pokemon.toString());
 	}
 	
 	private void pokemonImgUpdate() {
@@ -190,18 +194,49 @@ public class PokedexController implements Initializable{
 		weightLabel.setText(pokemon.getWeight());
 		//STATS BUTTON NOT READY YET
 		
-		//pokemonTypeUpdate();
-		//pokemonWeaknessUpdate();
+		pokemonTypeUpdate();
+		pokemonWeaknessUpdate();
 	}
 	
+	private void pokemonWeaknessUpdate() {
+		// TODO Auto-generated method stub
+		
+	}
+	private void pokemonTypeUpdate() {
+		// TODO Auto-generated method stub
+		
+	}
 	@FXML
 	private void onActionSearchBtn() {
-		System.out.println("searchBtn");
+		String idNumber = searchTxt.getText();
+		if(!idNumber.equals("")) {
+			int number = Integer.parseInt(idNumber);
+			if(number > 0 && number <= 1025) {		
+				pokemonPokedexDeserializer.setJson(number);
+				pokemon = pokemonPokedexDeserializer.createPokemon(pokemon);
+				
+				shinyOn = false;
+				pokemonLabelUpdate();
+				pokemonImgUpdate();
+				
+				searchTxt.setText(idNumber);
+			}
+			else searchTxt.setText("0");
+		}
 	}
 	
 	@FXML
 	private void onActionShinyBtn() {
-		System.out.println("shinyBtn");
+		if(!shinyOn && pokemon.getShinyImg() != null) {
+			Image pokemonImg = new Image(pokemon.getShinyImg());
+			photoFrame.setImage(pokemonImg);
+			
+			shinyOn = true;
+		}
+		else {
+			pokemonImgUpdate();	
+			shinyOn = false;
+		}
 	}
 	
 	@FXML
@@ -244,6 +279,7 @@ public class PokedexController implements Initializable{
 
         searchBtn.setVisible(true);
         searchTxt.setVisible(true);
+        searchTxt.setText("0");
 
         closeBtn.setVisible(true);
         startBtn.setVisible(false);

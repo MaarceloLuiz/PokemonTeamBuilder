@@ -1,6 +1,7 @@
 package com.marceloluiz.PokeAPITeamBuilder.models.entities;
 
 import java.util.List;
+import java.util.Set;
 
 import com.marceloluiz.PokeAPITeamBuilder.models.PokeStats;
 import com.marceloluiz.PokeAPITeamBuilder.models.enums.PokeType;
@@ -13,7 +14,7 @@ public class PokemonPokedex {
     private String shinyImg;
     private List<PokeType> pokeType;
     private List<PokeStats> stats;
-    private List<PokeType> weaknesses;
+    private Set<PokeType> weaknesses;
     private int generation;
     private String height;
     private String weight;
@@ -23,7 +24,7 @@ public class PokemonPokedex {
     }
 
 	public PokemonPokedex(int id, String name, String image, String shinyImg, List<PokeType> pokeType,
-			List<PokeStats> stats, List<PokeType> weaknesses, int generation, String height, String weight, String region) {
+			List<PokeStats> stats, Set<PokeType> weaknesses, int generation, String height, String weight, String region) {
 		this.id = id;
 		this.name = name;
 		this.image = image;
@@ -69,7 +70,7 @@ public class PokemonPokedex {
 		return stats;
 	}
 
-	public List<PokeType> getWeaknesses() {
+	public Set<PokeType> getWeaknesses() {
 		return weaknesses;
 	}
 

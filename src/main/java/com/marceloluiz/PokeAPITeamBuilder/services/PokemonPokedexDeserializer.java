@@ -1,7 +1,9 @@
 package com.marceloluiz.PokeAPITeamBuilder.services;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -11,6 +13,7 @@ import com.marceloluiz.PokeAPITeamBuilder.models.PokeData;
 import com.marceloluiz.PokeAPITeamBuilder.models.PokeSprite;
 import com.marceloluiz.PokeAPITeamBuilder.models.PokeSprite.Sprites;
 import com.marceloluiz.PokeAPITeamBuilder.models.PokeStats;
+import com.marceloluiz.PokeAPITeamBuilder.models.PokeWeakness;
 import com.marceloluiz.PokeAPITeamBuilder.models.entities.PokemonPokedex;
 import com.marceloluiz.PokeAPITeamBuilder.models.enums.PokeType;
 
@@ -36,13 +39,26 @@ public class PokemonPokedexDeserializer {
 					getSprites().stream().map(PokeSprite::getUrl).skip(1).findFirst().orElse(null).toString(),
 					getTypes(),
 					getStats(),
-					getTypes(), // THIS IS THE WEAKNESS AND SHOULD BE CHANGED!
+					getWeaknesses(), // THIS IS THE WEAKNESS AND SHOULD BE CHANGED!
 					getGeneration(),
 					data.getHeight(),
 					data.getWeight(),
 					getRegion().toUpperCase()); 
 		}
 		return pokemon;
+	}
+
+	private Set<PokeType> getWeaknesses() {
+		Set<PokeType> weaknesses = new HashSet<>();
+		
+		getTypes().forEach(t -> {
+			for(PokeType weak : t.weak) {
+				weaknesses.add(weak);
+			}
+		});	
+		
+		return (getTypes().size() > 1) ? PokeWeakness.allWeaknesses(getTypes()) : weaknesses;
+		
 	}
 
 	private String getRegion() {
