@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -122,26 +123,75 @@ public class PokedexController implements Initializable{
 	private Button statsBtn;
 	
 	//non JavaFx controlls
+	private PokemonPokedexDeserializer pokemonPokedexDeserializer;
+	
 	private PokemonPokedex pokemon;
 	
 	
 	@FXML
 	public void onActionRightArrowBtn() {
 		System.out.println("rightArrowBtn");
+		int index = pokemon.getId();
+		
+		if(pokemon.getId() == 1025) {
+			System.out.println("cannot go any further");
+		}
+		else {
+			pokemonPokedexDeserializer.setJson(index + 1);
+			pokemon = pokemonPokedexDeserializer.createPokemon(pokemon);
+			
+			pokemonLabelUpdate();
+			pokemonImgUpdate();
+		}
 	}
 	@FXML
 	public void onActionLeftArrowBtn() {
 		System.out.println("leftArrowBtn");
+		int index = pokemon.getId();
+		
+		if(pokemon.getId() == 1) {
+			System.out.println("cannot go behind");
+		}
+		else {
+			pokemonPokedexDeserializer.setJson(index - 1);
+			pokemon = pokemonPokedexDeserializer.createPokemon(pokemon);
+			
+			pokemonLabelUpdate();
+			pokemonImgUpdate();
+		}
 	}
 	
 	@FXML
 	public void onActionStartBtn(ActionEvent event) {
 		initializeControls();
 		
-		var pokemonPokedexDeserializer = new PokemonPokedexDeserializer();
-		pokemonPokedexDeserializer.setJson(448);
+		pokemonPokedexDeserializer = new PokemonPokedexDeserializer();
+		pokemonPokedexDeserializer.setJson(1);
 		
-		System.out.println(pokemonPokedexDeserializer.createPokemon(pokemon).toString());
+		pokemon = pokemonPokedexDeserializer.createPokemon(pokemon);
+		
+		pokemonImgUpdate();
+		pokemonLabelUpdate();
+		
+		System.out.println(pokemon.toString());
+	}
+	
+	private void pokemonImgUpdate() {
+		Image pokemonImg = new Image(pokemon.getImage());
+		photoFrame.setImage(pokemonImg);
+	}
+	
+	private void pokemonLabelUpdate() {
+		nameLabel.setText(pokemon.getName());
+		numberLabel.setText("N° " + Integer.toString(pokemon.getId()));
+		regionLabel.setText(pokemon.getRegion());
+		generationLabel.setText(Integer.toString(pokemon.getGeneration()) + " GENERATION");
+		heightLabel.setText(pokemon.getHeight());
+		weightLabel.setText(pokemon.getWeight());
+		//STATS BUTTON NOT READY YET
+		
+		//pokemonTypeUpdate();
+		//pokemonWeaknessUpdate();
 	}
 	
 	@FXML

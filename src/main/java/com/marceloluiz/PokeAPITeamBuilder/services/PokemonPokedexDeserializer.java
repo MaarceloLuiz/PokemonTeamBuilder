@@ -37,7 +37,7 @@ public class PokemonPokedexDeserializer {
 					getTypes(),
 					getStats(),
 					getTypes(), // THIS IS THE WEAKNESS AND SHOULD BE CHANGED!
-					getGeneration(), //work on the method
+					getGeneration(),
 					data.getHeight(),
 					data.getWeight(),
 					getRegion().toUpperCase()); 
