@@ -39,7 +39,7 @@ public class PokemonPokedexDeserializer {
 					getSprites().stream().map(PokeSprite::getUrl).skip(1).findFirst().orElse(null).toString(),
 					getTypes(),
 					getStats(),
-					getWeaknesses(), // THIS IS THE WEAKNESS AND SHOULD BE CHANGED!
+					getWeaknesses(),
 					getGeneration(),
 					data.getHeight(),
 					data.getWeight(),

@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import org.springframework.stereotype.Component;
 
 import com.marceloluiz.PokeAPITeamBuilder.models.entities.PokemonPokedex;
+import com.marceloluiz.PokeAPITeamBuilder.models.enums.PokeType;
 import com.marceloluiz.PokeAPITeamBuilder.services.PokemonPokedexDeserializer;
 import com.marceloluiz.PokeAPITeamBuilder.util.Constraints;
 import com.marceloluiz.PokeAPITeamBuilder.util.Utils;
@@ -203,8 +204,27 @@ public class PokedexController implements Initializable{
 		
 	}
 	private void pokemonTypeUpdate() {
-		// TODO Auto-generated method stub
+//		PokeType type = pokemon.getPokeType().get(0);
+//		String imgPath = type.getImage();
 		
+		String imgPath = pokemon.getPokeType().stream().map(PokeType::getImage).findFirst().orElse(null).toString();
+		Image pokemonImg = new Image(imgPath);
+		
+		typeOneImg.setImage(pokemonImg);
+		typeOneLabel.setText(pokemon.getPokeType().stream().findFirst().orElse(null).toString().toLowerCase());
+		typeOneLabel.setStyle(pokemon.getPokeType().stream().map(PokeType::getColor).findFirst().orElse(null));
+		
+		if(pokemon.getPokeType().size() == 1) {
+			typeTwoImg.setImage(null);
+			typeTwoLabel.setText("");
+		}
+		else {
+			imgPath = pokemon.getPokeType().stream().map(PokeType::getImage).skip(1).findFirst().orElse(null).toString();
+			Image pokemonImgTwo = new Image(imgPath);
+			typeTwoImg.setImage(pokemonImgTwo);
+			typeTwoLabel.setText(pokemon.getPokeType().stream().skip(1).findFirst().orElse(null).toString().toLowerCase());
+			typeTwoLabel.setStyle(pokemon.getPokeType().stream().map(PokeType::getColor).skip(1).findFirst().orElse(null));
+		}
 	}
 	@FXML
 	private void onActionSearchBtn() {

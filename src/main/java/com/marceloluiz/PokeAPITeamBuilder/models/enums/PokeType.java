@@ -41,6 +41,54 @@ public enum PokeType {
 		throw new IllegalArgumentException();
 	}
 	
+	public String getImage() {
+		return "file:assets/img/types/" + this.toString().toLowerCase() + "_icon.png";
+	}
+	
+	public String getColor() {
+			switch (this) {
+			case NORMAL:
+	        	return "-fx-text-fill: #9099a1;";
+			case FIGHTING:
+	        	return "-fx-text-fill: #ce4069;";
+			case FLYING:
+	        	return "-fx-text-fill: #8fa8dd;";
+			case POISON:
+	        	return "-fx-text-fill: #ab6ac8;";
+	        case GROUND:
+	        	return "-fx-text-fill: #d97746;";
+	        case ROCK:
+	        	return "-fx-text-fill: #c7b78b;";
+	        case BUG:
+	        	return "-fx-text-fill: #90c12c;";
+	        case GHOST:
+	        	return "-fx-text-fill: #5269ac;";  
+	        case STEEL:
+	        	return "-fx-text-fill: #5a8ea1;"; 	
+	        case FIRE:
+	            return "-fx-text-fill: #ff9c54;";
+	        case WATER:
+	        	return "-fx-text-fill: #4d90d5;";
+			case GRASS:
+	            return "-fx-text-fill: #63bb5b;";  
+			case ELECTRIC:
+	        	return "-fx-text-fill: #f3d23b;";
+	        case PSYCHIC:
+	        	return "-fx-text-fill: #f97176;";	
+	        case ICE:
+	        	return "-fx-text-fill: #74cec0;";
+	        case DRAGON:
+	        	return "-fx-text-fill: #0a6dc4;"; 
+	        case DARK:
+	        	return "-fx-text-fill: #5a5366;";
+	        case FAIRY:
+	            return "-fx-text-fill: #ec8fe6;";
+			default:
+				break;
+	    }                           
+			return "-fx-text-fill: #000000;";
+	}
+	
     public PokeType[] weak,strong, noEffect;
     
     static{
