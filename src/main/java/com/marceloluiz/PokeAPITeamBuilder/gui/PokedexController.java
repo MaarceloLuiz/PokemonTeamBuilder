@@ -123,7 +123,7 @@ public class PokedexController implements Initializable{
 	@FXML
 	private Button statsBtn;
 	
-	//non JavaFx controlls
+	//non JavaFx controls
 	private PokemonPokedexDeserializer pokemonPokedexDeserializer;
 	private PokemonPokedex pokemon;
 	private boolean shinyOn = false;
@@ -187,12 +187,16 @@ public class PokedexController implements Initializable{
 	}
 	
 	private void pokemonLabelUpdate() {
+		Double height = Double.parseDouble(pokemon.getHeight()) / 10;
+		Double weight = Double.parseDouble(pokemon.getWeight()) / 10;
+		
 		nameLabel.setText(pokemon.getName());
 		numberLabel.setText("N° " + Integer.toString(pokemon.getId()));
 		regionLabel.setText(pokemon.getRegion());
 		generationLabel.setText(Integer.toString(pokemon.getGeneration()) + " GENERATION");
-		heightLabel.setText(pokemon.getHeight());
-		weightLabel.setText(pokemon.getWeight());
+		heightLabel.setText(height.toString() + " M");
+		weightLabel.setText(weight.toString() + " KG");
+		genderLabel.setText("UNKNOWN");
 		//STATS BUTTON NOT READY YET
 		
 		pokemonTypeUpdate();
@@ -200,32 +204,116 @@ public class PokedexController implements Initializable{
 	}
 	
 	private void pokemonWeaknessUpdate() {
-		// TODO Auto-generated method stub
+		Label[] label = {weaknessesOneLabel, weaknessesTwoLabel, weaknessesThreeLabel, weaknessesFourLabel, weaknessesFiveLabel, weaknessesSixLabel};
+		ImageView[] imageView = {weaknessesOneImg, weaknessesTwoImg, weaknessesThreeImg, weaknessesFourImg, weaknessesFiveImg, weaknessesSixImg};
+		
+		if (pokemon.getWeaknesses().size() == 1) {
+			clearInfo();
+			
+            weaknessesOneLabel.setLayoutX(547);
+            weaknessesOneImg.setLayoutX(547+6);
+
+        } else if (pokemon.getWeaknesses().size() == 2) {
+        	clearInfo();
+        	
+            weaknessesOneLabel.setLayoutX(522);
+            weaknessesOneImg.setLayoutX(522+6);
+
+            weaknessesTwoLabel.setLayoutX(572);
+            weaknessesTwoImg.setLayoutX(572+6);
+
+        } else if (pokemon.getWeaknesses().size() == 3) {
+        	clearInfo();
+        	
+            weaknessesOneLabel.setLayoutX(507);
+            weaknessesOneImg.setLayoutX(507+6);
+            
+            weaknessesTwoLabel.setLayoutX(547);
+            weaknessesTwoImg.setLayoutX(547+6);
+            
+            weaknessesThreeLabel.setLayoutX(590);
+            weaknessesThreeImg.setLayoutX(590+6);
+
+        } else if (pokemon.getWeaknesses().size() == 4) {
+        	clearInfo();
+        	
+            weaknessesOneLabel.setLayoutX(473);
+            weaknessesOneImg.setLayoutX(473+6);
+
+            weaknessesTwoLabel.setLayoutX(522);
+            weaknessesTwoImg.setLayoutX(522+6);
+                 
+            weaknessesThreeLabel.setLayoutX(572);
+            weaknessesThreeImg.setLayoutX(572+6);
+            
+            weaknessesFourLabel.setLayoutX(621);
+            weaknessesFourImg.setLayoutX(621+6);
+
+        } else if (pokemon.getWeaknesses().size() == 5) {
+        	clearInfo();
+        	
+            weaknessesOneLabel.setLayoutX(462);
+            weaknessesOneImg.setLayoutX(462+6);
+
+            weaknessesTwoLabel.setLayoutX(505);
+            weaknessesTwoImg.setLayoutX(505+6);
+            
+            weaknessesThreeLabel.setLayoutX(547);
+            weaknessesThreeImg.setLayoutX(547+6);
+            
+            weaknessesFourLabel.setLayoutX(590);
+            weaknessesFourImg.setLayoutX(590+6);
+            
+            weaknessesFiveLabel.setLayoutX(633);
+            weaknessesFiveImg.setLayoutX(633+6);
+
+        } else if (pokemon.getWeaknesses().size() == 6) {
+        	clearInfo();
+        	
+            weaknessesOneLabel.setLayoutX(447);
+            weaknessesOneImg.setLayoutX(447+6);
+            
+            weaknessesTwoLabel.setLayoutX(486);
+            weaknessesTwoImg.setLayoutX(486+6);
+            
+            weaknessesThreeLabel.setLayoutX(526);
+            weaknessesThreeImg.setLayoutX(526+6);
+            
+            weaknessesFourLabel.setLayoutX(567);
+            weaknessesFourImg.setLayoutX(567+6);
+
+            weaknessesFiveLabel.setLayoutX(608);
+            weaknessesFiveImg.setLayoutX(608+6);
+            
+            weaknessesSixLabel.setLayoutX(647);
+            weaknessesSixImg.setLayoutX(647+6);
+        }
+		
+		typeInfo(pokemon.getWeaknesses().stream().findFirst().orElse(null), label[0], imageView[0]);
+		for(int i = 1; i< pokemon.getWeaknesses().size(); i++) {
+			typeInfo(pokemon.getWeaknesses().stream().skip(i).findFirst().orElse(null), label[i], imageView[i]);
+		}
 		
 	}
+	
 	private void pokemonTypeUpdate() {
-//		PokeType type = pokemon.getPokeType().get(0);
-//		String imgPath = type.getImage();
-		
-		String imgPath = pokemon.getPokeType().stream().map(PokeType::getImage).findFirst().orElse(null).toString();
-		Image pokemonImg = new Image(imgPath);
-		
-		typeOneImg.setImage(pokemonImg);
-		typeOneLabel.setText(pokemon.getPokeType().stream().findFirst().orElse(null).toString().toLowerCase());
-		typeOneLabel.setStyle(pokemon.getPokeType().stream().map(PokeType::getColor).findFirst().orElse(null));
+		typeInfo(pokemon.getPokeType().get(0), typeOneLabel, typeOneImg);
 		
 		if(pokemon.getPokeType().size() == 1) {
 			typeTwoImg.setImage(null);
 			typeTwoLabel.setText("");
 		}
-		else {
-			imgPath = pokemon.getPokeType().stream().map(PokeType::getImage).skip(1).findFirst().orElse(null).toString();
-			Image pokemonImgTwo = new Image(imgPath);
-			typeTwoImg.setImage(pokemonImgTwo);
-			typeTwoLabel.setText(pokemon.getPokeType().stream().skip(1).findFirst().orElse(null).toString().toLowerCase());
-			typeTwoLabel.setStyle(pokemon.getPokeType().stream().map(PokeType::getColor).skip(1).findFirst().orElse(null));
+		else {	
+			typeInfo(pokemon.getPokeType().get(1), typeTwoLabel, typeTwoImg);
 		}
 	}
+	
+	private void typeInfo(PokeType type, Label label, ImageView image) {
+		label.setStyle(type.getColor());
+		label.setText(type.toString());
+		image.setImage(new Image(type.getImage()));
+	}
+	
 	@FXML
 	private void onActionSearchBtn() {
 		String idNumber = searchTxt.getText();
@@ -282,6 +370,7 @@ public class PokedexController implements Initializable{
 	
 	private void initializeNodes() {
 		Constraints.setTextFieldNumericOnly(searchTxt);
+		Constraints.setTextFieldMaxLength(searchTxt, 4);
 	}
 	
 	private void initializeControls() {
@@ -307,5 +396,21 @@ public class PokedexController implements Initializable{
         closeImg.setVisible(true);
         
         statsBtn.setVisible(true);
+	}
+	
+	private void clearInfo() {
+		weaknessesOneLabel.setText("");
+        weaknessesTwoLabel.setText("");
+        weaknessesThreeLabel.setText("");
+        weaknessesFourLabel.setText("");
+        weaknessesFiveLabel.setText("");
+        weaknessesSixLabel.setText("");
+        
+        weaknessesOneImg.setImage(null);
+        weaknessesTwoImg.setImage(null);
+        weaknessesThreeImg.setImage(null);
+        weaknessesFourImg.setImage(null);
+        weaknessesFiveImg.setImage(null);
+        weaknessesSixImg.setImage(null);
 	}
 }
