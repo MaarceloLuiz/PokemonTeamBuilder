@@ -45,12 +45,14 @@
       <Label fx:id="weaknessesFourLabel" layoutX="572.0" layoutY="440.0" prefHeight="17.0" prefWidth="34.0" stylesheets="file:assets/cssSheets/labels.css" textFill="WHITE" />
       <Label fx:id="weaknessesFiveLabel" layoutX="612.0" layoutY="440.0" prefHeight="17.0" prefWidth="34.0" stylesheets="file:assets/cssSheets/labels.css" textFill="WHITE" />
       <Label fx:id="weaknessesSixLabel" layoutX="651.0" layoutY="440.0" prefHeight="17.0" prefWidth="34.0" stylesheets="file:assets/cssSheets/labels.css" textFill="WHITE" />
+      <Label fx:id="weaknessesSevenLabel" layoutX="693.0" layoutY="440.0" prefHeight="17.0" prefWidth="34.0" stylesheets="file:assets/cssSheets/labels.css" textFill="WHITE" />
       <ImageView fx:id="weaknessesOneImg" fitHeight="20.0" fitWidth="20.0" layoutX="461.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="weaknessesTwoImg" fitHeight="20.0" fitWidth="20.0" layoutX="488.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="weaknessesThreeImg" fitHeight="20.0" fitWidth="20.0" layoutX="529.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="weaknessesFourImg" fitHeight="20.0" fitWidth="20.0" layoutX="565.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="weaknessesFiveImg" fitHeight="20.0" fitWidth="20.0" layoutX="621.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="weaknessesSixImg" fitHeight="20.0" fitWidth="20.0" layoutX="658.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="weaknessesSevenImg" fitHeight="20.0" fitWidth="20.0" layoutX="700.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="regionImg" fitHeight="55.0" fitWidth="96.0" layoutX="230.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="file:assets/img/region.png" />

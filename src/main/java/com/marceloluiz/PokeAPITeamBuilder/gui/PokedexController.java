@@ -60,6 +60,8 @@ public class PokedexController implements Initializable{
 	private Label weaknessesFiveLabel;
 	@FXML
 	private Label weaknessesSixLabel;
+	@FXML
+	private Label weaknessesSevenLabel;
 	
 	@FXML
 	private ImageView weaknessesOneImg;
@@ -73,6 +75,8 @@ public class PokedexController implements Initializable{
 	private ImageView weaknessesFiveImg;
 	@FXML
 	private ImageView weaknessesSixImg;
+	@FXML
+	private ImageView weaknessesSevenImg;
 	@FXML
 	private ImageView regionImg;
 	
@@ -192,6 +196,9 @@ public class PokedexController implements Initializable{
 		
 		nameLabel.setText(pokemon.getName());
 		numberLabel.setText("N° " + Integer.toString(pokemon.getId()));
+		if(pokemon.getId()>=1000) {
+			numberLabel.setStyle("-fx-font-size: 18px;");
+		}
 		regionLabel.setText(pokemon.getRegion());
 		generationLabel.setText(Integer.toString(pokemon.getGeneration()) + " GENERATION");
 		heightLabel.setText(height.toString() + " M");
@@ -204,8 +211,8 @@ public class PokedexController implements Initializable{
 	}
 	
 	private void pokemonWeaknessUpdate() {
-		Label[] label = {weaknessesOneLabel, weaknessesTwoLabel, weaknessesThreeLabel, weaknessesFourLabel, weaknessesFiveLabel, weaknessesSixLabel};
-		ImageView[] imageView = {weaknessesOneImg, weaknessesTwoImg, weaknessesThreeImg, weaknessesFourImg, weaknessesFiveImg, weaknessesSixImg};
+		Label[] label = {weaknessesOneLabel, weaknessesTwoLabel, weaknessesThreeLabel, weaknessesFourLabel, weaknessesFiveLabel, weaknessesSixLabel, weaknessesSevenLabel};
+		ImageView[] imageView = {weaknessesOneImg, weaknessesTwoImg, weaknessesThreeImg, weaknessesFourImg, weaknessesFiveImg, weaknessesSixImg, weaknessesSevenImg};
 		
 		if (pokemon.getWeaknesses().size() == 1) {
 			clearInfo();
@@ -287,6 +294,29 @@ public class PokedexController implements Initializable{
             
             weaknessesSixLabel.setLayoutX(647);
             weaknessesSixImg.setLayoutX(647+6);
+        } else if (pokemon.getWeaknesses().size() == 7) {
+        	clearInfo();
+        	
+            weaknessesOneLabel.setLayoutX(443);
+            weaknessesOneImg.setLayoutX(443+6);
+            
+            weaknessesTwoLabel.setLayoutX(478);
+            weaknessesTwoImg.setLayoutX(478+6);
+            
+            weaknessesThreeLabel.setLayoutX(513);
+            weaknessesThreeImg.setLayoutX(513+6);
+            
+            weaknessesFourLabel.setLayoutX(547);
+            weaknessesFourImg.setLayoutX(547+6);
+
+            weaknessesFiveLabel.setLayoutX(583);
+            weaknessesFiveImg.setLayoutX(583+6);
+            
+            weaknessesSixLabel.setLayoutX(616);
+            weaknessesSixImg.setLayoutX(616+6);
+            
+            weaknessesSevenLabel.setLayoutX(651);
+            weaknessesSevenImg.setLayoutX(651+6);
         }
 		
 		typeInfo(pokemon.getWeaknesses().stream().findFirst().orElse(null), label[0], imageView[0]);
@@ -405,6 +435,7 @@ public class PokedexController implements Initializable{
         weaknessesFourLabel.setText("");
         weaknessesFiveLabel.setText("");
         weaknessesSixLabel.setText("");
+        weaknessesSevenLabel.setText("");
         
         weaknessesOneImg.setImage(null);
         weaknessesTwoImg.setImage(null);
@@ -412,5 +443,6 @@ public class PokedexController implements Initializable{
         weaknessesFourImg.setImage(null);
         weaknessesFiveImg.setImage(null);
         weaknessesSixImg.setImage(null);
+        weaknessesSevenImg.setImage(null);
 	}
 }

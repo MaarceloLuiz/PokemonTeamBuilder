@@ -41,6 +41,9 @@
 #weaknessesSixLabel {
     -fx-alignment: center;
 }
+#weaknessesSevenLabel {
+    -fx-alignment: center;
+}
 #regionLabel {
     -fx-alignment: center;
     -fx-font-size: 14;
