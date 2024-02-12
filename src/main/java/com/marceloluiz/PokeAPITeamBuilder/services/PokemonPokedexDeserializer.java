@@ -32,11 +32,13 @@ public class PokemonPokedexDeserializer {
 	}
 	
 	public PokemonPokedex createPokemon(PokemonPokedex pokemon) {
+		PokeSprite shinySprite = getSprites().get(1);
+		
 		for(PokeData data : getBaseData()) {
 			pokemon = new PokemonPokedex(data.getId(),
 					data.getName().toUpperCase(),
 					getSprites().stream().map(PokeSprite::getUrl).findFirst().orElse(null).toString(),
-					getSprites().stream().map(PokeSprite::getUrl).skip(1).findFirst().orElse(null).toString(),
+					shinySprite.getUrl(),
 					getTypes(),
 					getStats(),
 					getWeaknesses(),

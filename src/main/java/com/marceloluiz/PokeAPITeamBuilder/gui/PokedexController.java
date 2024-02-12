@@ -1,5 +1,6 @@
 package com.marceloluiz.PokeAPITeamBuilder.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -8,18 +9,24 @@ import org.springframework.stereotype.Component;
 import com.marceloluiz.PokeAPITeamBuilder.models.entities.PokemonPokedex;
 import com.marceloluiz.PokeAPITeamBuilder.models.enums.PokeType;
 import com.marceloluiz.PokeAPITeamBuilder.services.PokemonPokedexDeserializer;
+import com.marceloluiz.PokeAPITeamBuilder.util.Alerts;
 import com.marceloluiz.PokeAPITeamBuilder.util.Constraints;
 import com.marceloluiz.PokeAPITeamBuilder.util.Utils;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 @Component
 public class PokedexController implements Initializable{
@@ -132,9 +139,11 @@ public class PokedexController implements Initializable{
 	private PokemonPokedex pokemon;
 	private boolean shinyOn = false;
 	
+	private StatsViewController statsViewController;
+	
 	
 	@FXML
-	public void onActionRightArrowBtn() {
+	private void onActionRightArrowBtn() {
 		int index = pokemon.getId();
 		
 		if(pokemon.getId() == 1025) {
@@ -152,7 +161,7 @@ public class PokedexController implements Initializable{
 		}
 	}
 	@FXML
-	public void onActionLeftArrowBtn() {
+	private void onActionLeftArrowBtn() {
 		int index = pokemon.getId();
 		
 		if(pokemon.getId() == 1) {
@@ -171,7 +180,7 @@ public class PokedexController implements Initializable{
 	}
 	
 	@FXML
-	public void onActionStartBtn(ActionEvent event) {
+	private void onActionStartBtn(ActionEvent event) {
 		initializeControls();
 		
 		pokemonPokedexDeserializer = new PokemonPokedexDeserializer();
@@ -384,11 +393,28 @@ public class PokedexController implements Initializable{
 	
 	@FXML
 	private void onActionStatsBtn() {
-		System.out.println("statsBtn");
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/StatsView.fxml"));
+			Parent root = (Parent) loader.load();
+			
+			statsViewController = loader.getController();
+			
+			Stage stage = new Stage();
+			
+			stage.setTitle("Stats");
+			stage.setScene(new Scene(root));
+			stage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
+		}
+		
+		if(statsViewController != null) statsViewController.updatePokemonData(pokemon);
 	}
 	
 	@FXML
-	public void onBtnCloseAction(ActionEvent event) {
+	private void onBtnCloseAction(ActionEvent event) {
 		Utils.currentStage(event).close();
 	}
 
@@ -444,5 +470,9 @@ public class PokedexController implements Initializable{
         weaknessesFiveImg.setImage(null);
         weaknessesSixImg.setImage(null);
         weaknessesSevenImg.setImage(null);
+	}
+	
+	public PokemonPokedex getPokemon() {
+		return pokemon;
 	}
 }

@@ -3,7 +3,7 @@ package com.marceloluiz.PokeAPITeamBuilder.models;
 public class PokeStats {
 	
     private Stats stat;
-    private int baseStat;
+    private Integer baseStat;
 
     public PokeStats() {
     }
@@ -14,20 +14,20 @@ public class PokeStats {
 	}
     
 
-	public Stats getType() {
+	public Stats getStat() {
 		return stat;
 	}
 
-	public void setType(Stats type) {
+	public void setStat(Stats type) {
 		this.stat = type;
 	}
 
 
-	public int getBaseStat() {
+	public Integer getBaseStat() {
 		return baseStat;
 	}
 
-	public void setBaseStat(int baseStat) {
+	public void setBaseStat(Integer baseStat) {
 		this.baseStat = baseStat;
 	}
 
