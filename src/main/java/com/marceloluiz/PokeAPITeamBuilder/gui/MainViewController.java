@@ -62,8 +62,10 @@ public class MainViewController implements Initializable{
 	public void onBtnTeamBuilderAction() {
 		loadView("../gui/TeamBuilder.fxml", "TeamBuilderView", (TeamBuilderController controller) -> {
 			controller.setPokemonService(new PokemonService());
-			controller.updateTableView();
+			controller.addPokemon();
 		});
+		
+//		loadView("../gui/TeamBuilder.fxml", "TeamBuilderView", x -> {});
 	}
 	
 	@FXML
