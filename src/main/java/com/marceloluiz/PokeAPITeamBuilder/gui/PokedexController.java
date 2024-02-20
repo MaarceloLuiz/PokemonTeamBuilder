@@ -26,6 +26,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 @Component
@@ -392,7 +393,7 @@ public class PokedexController implements Initializable{
 	}
 	
 	@FXML
-	private void onActionStatsBtn() {
+	private void onActionStatsBtn(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/StatsView.fxml"));
 			Parent root = (Parent) loader.load();
@@ -403,6 +404,10 @@ public class PokedexController implements Initializable{
 			
 			stage.setTitle("Stats");
 			stage.setScene(new Scene(root));
+			stage.setResizable(false);
+			stage.initOwner(Utils.currentStage(event));
+			stage.initModality(Modality.WINDOW_MODAL);
+			
 			stage.show();
 
 		} catch (IOException e) {

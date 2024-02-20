@@ -342,7 +342,7 @@ public class TeamBuilderController implements Initializable{
 	
 	@FXML
 	public void onActionImgOneClick() {
-		updatePokemonInfoControlls(addImgOne, hpLabel, hpProgressBar, hpValueLabel, 
+		updatePokemonInfoControls(addImgOne, hpLabel, hpProgressBar, hpValueLabel, 
 									atkLabel, atkProgressBar, atkValueLabel,
 									defLabel, defProgressBar, defValueLabel,
 									spAtkLabel, spAtkProgressBar, spAtkValueLabel,
@@ -350,7 +350,7 @@ public class TeamBuilderController implements Initializable{
 	}
 	@FXML
 	public void onActionImgTwoClick() {
-		updatePokemonInfoControlls(addImgTwo, hpLabelTwo, hpProgressBarTwo, hpValueLabelTwo, 
+		updatePokemonInfoControls(addImgTwo, hpLabelTwo, hpProgressBarTwo, hpValueLabelTwo, 
 				atkLabelTwo, atkProgressBarTwo, atkValueLabelTwo,
 				defLabelTwo, defProgressBarTwo, defValueLabelTwo,
 				spAtkLabelTwo, spAtkProgressBarTwo, spAtkValueLabelTwo,
@@ -358,7 +358,7 @@ public class TeamBuilderController implements Initializable{
 	}
 	@FXML
 	public void onActionImgThreeClick() {	
-		updatePokemonInfoControlls(addImgThree, hpLabelThree, hpProgressBarThree, hpValueLabelThree, 
+		updatePokemonInfoControls(addImgThree, hpLabelThree, hpProgressBarThree, hpValueLabelThree, 
 				atkLabelThree, atkProgressBarThree, atkValueLabelThree,
 				defLabelThree, defProgressBarThree, defValueLabelThree,
 				spAtkLabelThree, spAtkProgressBarThree, spAtkValueLabelThree,
@@ -366,7 +366,7 @@ public class TeamBuilderController implements Initializable{
 	}
 	@FXML
 	public void onActionImgFourClick() {	
-		updatePokemonInfoControlls(addImgFour, hpLabelFour, hpProgressBarFour, hpValueLabelFour, 
+		updatePokemonInfoControls(addImgFour, hpLabelFour, hpProgressBarFour, hpValueLabelFour, 
 				atkLabelFour, atkProgressBarFour, atkValueLabelFour,
 				defLabelFour, defProgressBarFour, defValueLabelFour,
 				spAtkLabelFour, spAtkProgressBarFour, spAtkValueLabelFour,
@@ -374,7 +374,7 @@ public class TeamBuilderController implements Initializable{
 	}
 	@FXML
 	public void onActionImgFiveClick() {	
-		updatePokemonInfoControlls(addImgFive, hpLabelFive, hpProgressBarFive, hpValueLabelFive, 
+		updatePokemonInfoControls(addImgFive, hpLabelFive, hpProgressBarFive, hpValueLabelFive, 
 				atkLabelFive, atkProgressBarFive, atkValueLabelFive,
 				defLabelFive, defProgressBarFive, defValueLabelFive,
 				spAtkLabelFive, spAtkProgressBarFive, spAtkValueLabelFive,
@@ -382,7 +382,7 @@ public class TeamBuilderController implements Initializable{
 	}
 	@FXML
 	public void onActionImgSixClick() {	
-		updatePokemonInfoControlls(addImgSix, hpLabelSix, hpProgressBarSix, hpValueLabelSix, 
+		updatePokemonInfoControls(addImgSix, hpLabelSix, hpProgressBarSix, hpValueLabelSix, 
 				atkLabelSix, atkProgressBarSix, atkValueLabelSix,
 				defLabelSix, defProgressBarSix, defValueLabelSix,
 				spAtkLabelSix, spAtkProgressBarSix, spAtkValueLabelSix,
@@ -426,7 +426,7 @@ public class TeamBuilderController implements Initializable{
 //		labelValue.setText(stats.getBaseStat().toString());
 //	}
 	
-	private void updatePokemonInfoControlls(ImageView image, Label hp, ProgressBar hpBar, Label hpValue,
+	private void updatePokemonInfoControls(ImageView image, Label hp, ProgressBar hpBar, Label hpValue,
 											Label atk, ProgressBar atkbar, Label atkValue,
 											Label def, ProgressBar defBar, Label defValue,
 											Label spAtk, ProgressBar spAtkBar, Label spAtkValue,

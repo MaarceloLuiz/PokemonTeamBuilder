@@ -21,6 +21,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 @Component
@@ -59,8 +60,8 @@ public class MainViewController implements Initializable{
 	}
 
 	@FXML
-	public void onBtnTeamBuilderAction() {
-		loadView("../gui/TeamBuilder.fxml", "TeamBuilderView", (TeamBuilderController controller) -> {
+	public void onBtnTeamBuilderAction(ActionEvent event) {
+		loadView(Utils.currentStage(event), "../gui/TeamBuilder.fxml", "TeamBuilderView", (TeamBuilderController controller) -> {
 			controller.setPokemonService(new PokemonService());
 			controller.addPokemon();
 		});
@@ -69,8 +70,8 @@ public class MainViewController implements Initializable{
 	}
 	
 	@FXML
-	public void onBtnPokedexAction() {
-		loadView("../gui/Pokedex.fxml", "PokedexView", x -> {});
+	public void onBtnPokedexAction(ActionEvent event) {
+		loadView(Utils.currentStage(event), "../gui/Pokedex.fxml", "PokedexView", x -> {});
 	}
 
 	@FXML
@@ -83,7 +84,7 @@ public class MainViewController implements Initializable{
 	public void initialize(URL uri, ResourceBundle rb) {
 	}
 	
-	private synchronized <T> void loadView(String absoluteName, String title, Consumer<T> initializingAction) {
+	private synchronized <T> void loadView(Stage parentStage, String absoluteName, String title, Consumer<T> initializingAction) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Parent root = (Parent) loader.load();
@@ -92,8 +93,12 @@ public class MainViewController implements Initializable{
 			
 			stage.setTitle(title);
 			stage.setScene(new Scene(root));
+			stage.setResizable(false);
+			stage.initOwner(parentStage);
+			stage.initModality(Modality.WINDOW_MODAL);
+			
 			stage.show();
-
+			
 			T controller = loader.getController();
 			initializingAction.accept(controller);
 			
