@@ -10,12 +10,15 @@ import com.marceloluiz.PokeAPITeamBuilder.models.entities.Pokemon;
 import com.marceloluiz.PokeAPITeamBuilder.models.entities.PokemonPokedex;
 import com.marceloluiz.PokeAPITeamBuilder.services.PokemonPokedexDeserializer;
 import com.marceloluiz.PokeAPITeamBuilder.services.PokemonService;
+import com.marceloluiz.PokeAPITeamBuilder.util.Constraints;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -87,6 +90,13 @@ public class TeamBuilderController implements Initializable{
 	@FXML
 	private ImageView changeImg;
 	
+	@FXML
+	private Label searchIdLabel;
+	@FXML
+	private TextField searchIdText;
+	@FXML
+	private Button searchBtn;
+	
 	//PANE 2
 	@FXML
 	private Label nameLabelTwo;
@@ -138,6 +148,13 @@ public class TeamBuilderController implements Initializable{
 
 	@FXML
 	private ImageView changeImgTwo;
+	
+	@FXML
+	private Label searchIdLabelTwo;
+	@FXML
+	private TextField searchIdTextTwo;
+	@FXML
+	private Button searchBtnTwo;
 	
 	//PANE 3
 	@FXML
@@ -191,6 +208,13 @@ public class TeamBuilderController implements Initializable{
 	@FXML
 	private ImageView changeImgThree;
 	
+	@FXML
+	private Label searchIdLabelThree;
+	@FXML
+	private TextField searchIdTextThree;
+	@FXML
+	private Button searchBtnThree;
+	
 	//PANE 4
 	@FXML
 	private Label nameLabelFour;
@@ -242,6 +266,13 @@ public class TeamBuilderController implements Initializable{
 
 	@FXML
 	private ImageView changeImgFour;
+	
+	@FXML
+	private Label searchIdLabelFour;
+	@FXML
+	private TextField searchIdTextFour;
+	@FXML
+	private Button searchBtnFour;
 	
 	//PANE 5
 	@FXML
@@ -295,6 +326,13 @@ public class TeamBuilderController implements Initializable{
 	@FXML
 	private ImageView changeImgFive;
 	
+	@FXML
+	private Label searchIdLabelFive;
+	@FXML
+	private TextField searchIdTextFive;
+	@FXML
+	private Button searchBtnFive;
+	
 	//PANE 6
 	@FXML
 	private Label nameLabelSix;
@@ -347,6 +385,13 @@ public class TeamBuilderController implements Initializable{
 	@FXML
 	private ImageView changeImgSix;
 	
+	@FXML
+	private Label searchIdLabelSix;
+	@FXML
+	private TextField searchIdTextSix;
+	@FXML
+	private Button searchBtnSix;
+	
 	//non javaFX components
 	private PokemonService service;
 	private ObservableList<Pokemon> obsList;
@@ -361,89 +406,217 @@ public class TeamBuilderController implements Initializable{
 	//First Image Click Events
 	@FXML
 	public void onActionImgOneClick() {
-		updatePokemonData(448, mainImage, firstTypeImg, secondTypeImg, nameLabel, idLabel);
-		
-		updatePokemonInfoControls(addImgOne, hpLabel, hpProgressBar, hpValueLabel, 
-				atkLabel, atkProgressBar, atkValueLabel,
-				defLabel, defProgressBar, defValueLabel,
-				spAtkLabel, spAtkProgressBar, spAtkValueLabel,
-				spDefLabel, spDefProgressBar, spDefValueLabel, changeImg);
+		updateSearchInfoControls(addImgOne, searchIdLabel, searchIdText, searchBtn);
 	}
 	@FXML
 	public void onActionImgTwoClick() {
-		updatePokemonData(6, mainImageTwo, firstTypeImg2, secondTypeImg2, nameLabelTwo, idLabelTwo);
-		
-		updatePokemonInfoControls(addImgTwo, hpLabelTwo, hpProgressBarTwo, hpValueLabelTwo, 
-				atkLabelTwo, atkProgressBarTwo, atkValueLabelTwo,
-				defLabelTwo, defProgressBarTwo, defValueLabelTwo,
-				spAtkLabelTwo, spAtkProgressBarTwo, spAtkValueLabelTwo,
-				spDefLabelTwo, spDefProgressBarTwo, spDefValueLabelTwo, changeImgTwo);
+		updateSearchInfoControls(addImgTwo, searchIdLabelTwo, searchIdTextTwo, searchBtnTwo);
 	}
 	@FXML
 	public void onActionImgThreeClick() {	
-		updatePokemonData(149, mainImageThree, firstTypeImg3, secondTypeImg3, nameLabelThree, idLabelThree);
-		
-		updatePokemonInfoControls(addImgThree, hpLabelThree, hpProgressBarThree, hpValueLabelThree, 
-				atkLabelThree, atkProgressBarThree, atkValueLabelThree,
-				defLabelThree, defProgressBarThree, defValueLabelThree,
-				spAtkLabelThree, spAtkProgressBarThree, spAtkValueLabelThree,
-				spDefLabelThree, spDefProgressBarThree, spDefValueLabelThree, changeImgThree);
+		updateSearchInfoControls(addImgThree, searchIdLabelThree, searchIdTextThree, searchBtnThree);
 	}
 	@FXML
 	public void onActionImgFourClick() {	
-		updatePokemonData(445, mainImageFour, firstTypeImg4, secondTypeImg4, nameLabelFour, idLabelFour);
-		
-		updatePokemonInfoControls(addImgFour, hpLabelFour, hpProgressBarFour, hpValueLabelFour, 
-				atkLabelFour, atkProgressBarFour, atkValueLabelFour,
-				defLabelFour, defProgressBarFour, defValueLabelFour,
-				spAtkLabelFour, spAtkProgressBarFour, spAtkValueLabelFour,
-				spDefLabelFour, spDefProgressBarFour, spDefValueLabelFour, changeImgFour);
+		updateSearchInfoControls(addImgFour, searchIdLabelFour, searchIdTextFour, searchBtnFour);
 	}
 	@FXML
-	public void onActionImgFiveClick() {	
-		updatePokemonData(373, mainImageFive, firstTypeImg5, secondTypeImg5, nameLabelFive, idLabelFive);
-		
-		updatePokemonInfoControls(addImgFive, hpLabelFive, hpProgressBarFive, hpValueLabelFive, 
-				atkLabelFive, atkProgressBarFive, atkValueLabelFive,
-				defLabelFive, defProgressBarFive, defValueLabelFive,
-				spAtkLabelFive, spAtkProgressBarFive, spAtkValueLabelFive,
-				spDefLabelFive, spDefProgressBarFive, spDefValueLabelFive, changeImgFive);	
+	public void onActionImgFiveClick() {
+		updateSearchInfoControls(addImgFive, searchIdLabelFive, searchIdTextFive, searchBtnFive);
 	}
 	@FXML
 	public void onActionImgSixClick() {	
-		updatePokemonData(248, mainImageSix, firstTypeImg6, secondTypeImg6, nameLabelSix, idLabelSix);
-		
-		updatePokemonInfoControls(addImgSix, hpLabelSix, hpProgressBarSix, hpValueLabelSix, 
-				atkLabelSix, atkProgressBarSix, atkValueLabelSix,
-				defLabelSix, defProgressBarSix, defValueLabelSix,
-				spAtkLabelSix, spAtkProgressBarSix, spAtkValueLabelSix,
-				spDefLabelSix, spDefProgressBarSix, spDefValueLabelSix, changeImgSix);
+		updateSearchInfoControls(addImgSix, searchIdLabelSix, searchIdTextSix, searchBtnSix);
+	}
+	
+	// OK BUTTON CLICK
+	@FXML
+	public void onActionSearchBtnClick() {
+		String idNumber = searchIdText.getText();
+		if(!idNumber.equals("")) {
+			int number = Integer.parseInt(idNumber);
+			if(number > 0 && number <= 1025) {		
+				updatePokemonData(number, mainImage, firstTypeImg, secondTypeImg, nameLabel, idLabel);
+				
+				updatePokemonInfoControls(searchIdLabel, searchIdText, searchBtn,
+						hpLabel, hpProgressBar, hpValueLabel, 
+						atkLabel, atkProgressBar, atkValueLabel,
+						defLabel, defProgressBar, defValueLabel,
+						spAtkLabel, spAtkProgressBar, spAtkValueLabel,
+						spDefLabel, spDefProgressBar, spDefValueLabel, changeImg);
+				
+				searchIdText.setText(idNumber);
+			}
+			else searchIdText.setText("0");
+		}
+	}
+	@FXML
+	public void onActionSearchBtnTwoClick() {
+		String idNumber = searchIdTextTwo.getText();
+		if(!idNumber.equals("")) {
+			int number = Integer.parseInt(idNumber);
+			if(number > 0 && number <= 1025) {		
+				updatePokemonData(number, mainImageTwo, firstTypeImg2, secondTypeImg2, nameLabelTwo, idLabelTwo);
+				
+				updatePokemonInfoControls(searchIdLabelTwo, searchIdTextTwo, searchBtnTwo,
+						hpLabelTwo, hpProgressBarTwo, hpValueLabelTwo, 
+						atkLabelTwo, atkProgressBarTwo, atkValueLabelTwo,
+						defLabelTwo, defProgressBarTwo, defValueLabelTwo,
+						spAtkLabelTwo, spAtkProgressBarTwo, spAtkValueLabelTwo,
+						spDefLabelTwo, spDefProgressBarTwo, spDefValueLabelTwo, changeImgTwo);
+				
+				searchIdTextTwo.setText(idNumber);
+			}
+			else searchIdTextTwo.setText("0");
+		}
+	}
+	@FXML
+	public void onActionSearchBtnThreeClick() {
+		String idNumber = searchIdTextThree.getText();
+		if(!idNumber.equals("")) {
+			int number = Integer.parseInt(idNumber);
+			if(number > 0 && number <= 1025) {		
+				updatePokemonData(number, mainImageThree, firstTypeImg3, secondTypeImg3, nameLabelThree, idLabelThree);
+				
+				updatePokemonInfoControls(searchIdLabelThree, searchIdTextThree, searchBtnThree,
+						hpLabelThree, hpProgressBarThree, hpValueLabelThree, 
+						atkLabelThree, atkProgressBarThree, atkValueLabelThree,
+						defLabelThree, defProgressBarThree, defValueLabelThree,
+						spAtkLabelThree, spAtkProgressBarThree, spAtkValueLabelThree,
+						spDefLabelThree, spDefProgressBarThree, spDefValueLabelThree, changeImgThree);
+				
+				searchIdTextThree.setText(idNumber);
+			}
+			else searchIdTextThree.setText("0");
+		}
+	}
+	@FXML
+	public void onActionSearchBtnFourClick() {
+		String idNumber = searchIdTextFour.getText();
+		if(!idNumber.equals("")) {
+			int number = Integer.parseInt(idNumber);
+			if(number > 0 && number <= 1025) {		
+				updatePokemonData(number, mainImageFour, firstTypeImg4, secondTypeImg4, nameLabelFour, idLabelFour);
+				
+				updatePokemonInfoControls(searchIdLabelFour, searchIdTextFour, searchBtnFour,
+						hpLabelFour, hpProgressBarFour, hpValueLabelFour, 
+						atkLabelFour, atkProgressBarFour, atkValueLabelFour,
+						defLabelFour, defProgressBarFour, defValueLabelFour,
+						spAtkLabelFour, spAtkProgressBarFour, spAtkValueLabelFour,
+						spDefLabelFour, spDefProgressBarFour, spDefValueLabelFour, changeImgFour);
+				
+				searchIdTextFour.setText(idNumber);
+			}
+			else searchIdTextFour.setText("0");
+		}
+	}
+	@FXML
+	public void onActionSearchBtnFiveClick() {
+		String idNumber = searchIdTextFive.getText();
+		if(!idNumber.equals("")) {
+			int number = Integer.parseInt(idNumber);
+			if(number > 0 && number <= 1025) {		
+				updatePokemonData(number, mainImageFive, firstTypeImg5, secondTypeImg5, nameLabelFive, idLabelFive);
+				
+				updatePokemonInfoControls(searchIdLabelFive, searchIdTextFive, searchBtnFive,
+						hpLabelFive, hpProgressBarFive, hpValueLabelFive, 
+						atkLabelFive, atkProgressBarFive, atkValueLabelFive,
+						defLabelFive, defProgressBarFive, defValueLabelFive,
+						spAtkLabelFive, spAtkProgressBarFive, spAtkValueLabelFive,
+						spDefLabelFive, spDefProgressBarFive, spDefValueLabelFive, changeImgFive);
+				
+				searchIdTextFive.setText(idNumber);
+			}
+			else searchIdTextFive.setText("0");
+		}
+	}
+	@FXML
+	public void onActionSearchBtnSixClick() {
+		String idNumber = searchIdTextSix.getText();
+		if(!idNumber.equals("")) {
+			int number = Integer.parseInt(idNumber);
+			if(number > 0 && number <= 1025) {		
+				updatePokemonData(number, mainImageSix, firstTypeImg6, secondTypeImg6, nameLabelSix, idLabelSix);
+				
+				updatePokemonInfoControls(searchIdLabelSix, searchIdTextSix, searchBtnSix,
+						hpLabelSix, hpProgressBarSix, hpValueLabelSix, 
+						atkLabelSix, atkProgressBarSix, atkValueLabelSix,
+						defLabelSix, defProgressBarSix, defValueLabelSix,
+						spAtkLabelSix, spAtkProgressBarSix, spAtkValueLabelSix,
+						spDefLabelSix, spDefProgressBarSix, spDefValueLabelSix, changeImgSix);
+				
+				searchIdTextSix.setText(idNumber);
+			}
+			else searchIdTextSix.setText("0");
+		}
 	}
 	
 	//Change Pokemon Image Click Events
 	@FXML
 	public void onActionChangeImgClick() {
-		System.out.println("onActionChangeImgClick");
+		updatePokemonInfoControlsAfterChange(searchIdLabel, searchIdText, searchBtn,
+				hpLabel, hpProgressBar, hpValueLabel, 
+				atkLabel, atkProgressBar, atkValueLabel,
+				defLabel, defProgressBar, defValueLabel,
+				spAtkLabel, spAtkProgressBar, spAtkValueLabel,
+				spDefLabel, spDefProgressBar, spDefValueLabel,changeImg,
+				nameLabel, idLabel,
+				firstTypeImg, secondTypeImg, mainImage);
 	}
 	@FXML
 	public void onActionChangeImgTwoClick() {
-		System.out.println("onActionChangeImgTwoClick");
+		updatePokemonInfoControlsAfterChange(searchIdLabelTwo, searchIdTextTwo, searchBtnTwo,
+				hpLabelTwo, hpProgressBarTwo, hpValueLabelTwo, 
+				atkLabelTwo, atkProgressBarTwo, atkValueLabelTwo,
+				defLabelTwo, defProgressBarTwo, defValueLabelTwo,
+				spAtkLabelTwo, spAtkProgressBarTwo, spAtkValueLabelTwo,
+				spDefLabelTwo, spDefProgressBarTwo, spDefValueLabelTwo, changeImgTwo,
+				nameLabelTwo, idLabelTwo,
+				firstTypeImg2, secondTypeImg2, mainImageTwo);
 	}
 	@FXML
 	public void onActionChangeImgThreeClick() {
-		System.out.println("onActionChangeImgThreeClick");
+		updatePokemonInfoControlsAfterChange(searchIdLabelThree, searchIdTextThree, searchBtnThree,
+				hpLabelThree, hpProgressBarThree, hpValueLabelThree, 
+				atkLabelThree, atkProgressBarThree, atkValueLabelThree,
+				defLabelThree, defProgressBarThree, defValueLabelThree,
+				spAtkLabelThree, spAtkProgressBarThree, spAtkValueLabelThree,
+				spDefLabelThree, spDefProgressBarThree, spDefValueLabelThree, changeImgThree,
+				nameLabelThree, idLabelThree,
+				firstTypeImg3, secondTypeImg3, mainImageThree);
 	}
 	@FXML
 	public void onActionChangeImgFourClick() {
-		System.out.println("onActionChangeImgFourClick");
+		updatePokemonInfoControlsAfterChange(searchIdLabelFour, searchIdTextFour, searchBtnFour,
+				hpLabelFour, hpProgressBarFour, hpValueLabelFour, 
+				atkLabelFour, atkProgressBarFour, atkValueLabelFour,
+				defLabelFour, defProgressBarFour, defValueLabelFour,
+				spAtkLabelFour, spAtkProgressBarFour, spAtkValueLabelFour,
+				spDefLabelFour, spDefProgressBarFour, spDefValueLabelFour, changeImgFour,
+				nameLabelFour, idLabelFour,
+				firstTypeImg4, secondTypeImg4, mainImageFour);
 	}
 	@FXML
 	public void onActionChangeImgFiveClick() {
-		System.out.println("onActionChangeImgFiveClick");
+		updatePokemonInfoControlsAfterChange(searchIdLabelFive, searchIdTextFive, searchBtnFive,
+				hpLabelFive, hpProgressBarFive, hpValueLabelFive, 
+				atkLabelFive, atkProgressBarFive, atkValueLabelFive,
+				defLabelFive, defProgressBarFive, defValueLabelFive,
+				spAtkLabelFive, spAtkProgressBarFive, spAtkValueLabelFive,
+				spDefLabelFive, spDefProgressBarFive, spDefValueLabelFive, changeImgFive,
+				nameLabelFive, idLabelFive,
+				firstTypeImg5, secondTypeImg5, mainImageFive);
 	}
 	@FXML
 	public void onActionChangeImgSixClick() {
-		System.out.println("onActionChangeImgSixClick");
+		updatePokemonInfoControlsAfterChange(searchIdLabelSix, searchIdTextSix, searchBtnSix,
+				hpLabelSix, hpProgressBarSix, hpValueLabelSix, 
+				atkLabelSix, atkProgressBarSix, atkValueLabelSix,
+				defLabelSix, defProgressBarSix, defValueLabelSix,
+				spAtkLabelSix, spAtkProgressBarSix, spAtkValueLabelSix,
+				spDefLabelSix, spDefProgressBarSix, spDefValueLabelSix, changeImgSix,
+				nameLabelSix, idLabelSix,
+				firstTypeImg6, secondTypeImg6, mainImageSix);
 	}
 	
 	private void pokemonImgUpdate(ImageView mainImage) {
@@ -483,13 +656,16 @@ public class TeamBuilderController implements Initializable{
 		labelValue.setText(stats.getBaseStat().toString());
 	}
 	
-	private void updatePokemonInfoControls(ImageView image, Label hp, ProgressBar hpBar, Label hpValue,
+	private void updatePokemonInfoControls(Label searchLbl, TextField searchTxt, Button searchBtn, 
+											Label hp, ProgressBar hpBar, Label hpValue,
 											Label atk, ProgressBar atkbar, Label atkValue,
 											Label def, ProgressBar defBar, Label defValue,
 											Label spAtk, ProgressBar spAtkBar, Label spAtkValue,
 											Label spDef, ProgressBar spDefBar, Label spDefValue,
 											ImageView changeImg) {
-		image.setVisible(false);
+		searchLbl.setVisible(false);
+		searchTxt.setVisible(false);
+		searchBtn.setVisible(false);
 		
 		hp.setVisible(true);
 		hpBar.setVisible(true);
@@ -521,6 +697,57 @@ public class TeamBuilderController implements Initializable{
 			updateStatsInfo(pokemon.getStats().get(i), label[i], progressBar[i], labelValue[i]);
 		}
 		
+	}
+	
+	private void updatePokemonInfoControlsAfterChange(Label searchLbl, TextField searchTxt, Button searchBtn, 
+											Label hp, ProgressBar hpBar, Label hpValue,
+											Label atk, ProgressBar atkbar, Label atkValue,
+											Label def, ProgressBar defBar, Label defValue,
+											Label spAtk, ProgressBar spAtkBar, Label spAtkValue,
+											Label spDef, ProgressBar spDefBar, Label spDefValue, ImageView changeImg,
+											Label nameLbl, Label idLbl,
+											ImageView typeImgOne, ImageView typeImgTwo, ImageView mainImg) {
+			searchLbl.setVisible(true);
+			searchTxt.setVisible(true);
+			searchBtn.setVisible(true);
+			
+			hp.setVisible(false);
+			hpBar.setVisible(false);
+			hpValue.setVisible(false);
+			
+			atk.setVisible(false);
+			atkbar.setVisible(false);
+			atkValue.setVisible(false);
+			
+			def.setVisible(false);
+			defBar.setVisible(false);
+			defValue.setVisible(false);
+			
+			spAtk.setVisible(false);
+			spAtkBar.setVisible(false);
+			spAtkValue.setVisible(false);
+			
+			spDef.setVisible(false);
+			spDefBar.setVisible(false);
+			spDefValue.setVisible(false);
+			
+			nameLbl.setText("");
+			idLbl.setText("");
+			
+			typeImgOne.setImage(null);
+			typeImgTwo.setImage(null);
+			mainImg.setImage(null);
+			
+			changeImg.setImage(null);
+			
+	}
+	
+	private void updateSearchInfoControls(ImageView image, Label label, TextField textField, Button button) {
+		image.setVisible(false);
+		
+		label.setVisible(true);
+		textField.setVisible(true);
+		button.setVisible(true);
 	}
 	
 	private void updatePokemonData(Integer jsonNumber, ImageView mainImage,
@@ -560,5 +787,23 @@ public class TeamBuilderController implements Initializable{
 		addImgFour.setImage(addIcon);
 		addImgFive.setImage(addIcon);
 		addImgSix.setImage(addIcon);
+		
+		Constraints.setTextFieldNumericOnly(searchIdText);
+		Constraints.setTextFieldMaxLength(searchIdText, 4);
+		
+		Constraints.setTextFieldNumericOnly(searchIdTextTwo);
+		Constraints.setTextFieldMaxLength(searchIdTextTwo, 4);
+		
+		Constraints.setTextFieldNumericOnly(searchIdTextThree);
+		Constraints.setTextFieldMaxLength(searchIdTextThree, 4);
+		
+		Constraints.setTextFieldNumericOnly(searchIdTextFour);
+		Constraints.setTextFieldMaxLength(searchIdTextFour, 4);
+		
+		Constraints.setTextFieldNumericOnly(searchIdTextFive);
+		Constraints.setTextFieldMaxLength(searchIdTextFive, 4);
+		
+		Constraints.setTextFieldNumericOnly(searchIdTextSix);
+		Constraints.setTextFieldMaxLength(searchIdTextSix, 4);
 	}
 }

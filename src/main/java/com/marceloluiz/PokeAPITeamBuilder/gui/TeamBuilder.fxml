@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -78,6 +80,9 @@
             <Label fx:id="nameLabel" layoutX="26.0" layoutY="17.0" prefHeight="17.0" prefWidth="198.0" />
             <Label fx:id="idLabel" layoutX="186.0" layoutY="17.0" />
             <ImageView fx:id="changeImg" fitHeight="33.0" fitWidth="33.0" layoutX="150.0" layoutY="173.0" onMouseClicked="#onActionChangeImgClick" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="searchIdLabel" layoutX="73.0" layoutY="107.0" text="Type a Pokemon ID" visible="false" />
+            <TextField fx:id="searchIdText" layoutX="192.0" layoutY="103.0" onAction="#onActionSearchBtnClick" visible="false" />
+            <Button fx:id="searchBtn" layoutX="170.0" layoutY="144.0" mnemonicParsing="false" onAction="#onActionSearchBtnClick" prefHeight="25.0" prefWidth="65.0" text="OK" visible="false" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -151,6 +156,9 @@
             <Label fx:id="nameLabelTwo" layoutX="26.0" layoutY="17.0" prefHeight="17.0" prefWidth="198.0" />
             <Label fx:id="idLabelTwo" layoutX="186.0" layoutY="17.0" />
             <ImageView fx:id="changeImgTwo" fitHeight="33.0" fitWidth="33.0" layoutX="150.0" layoutY="173.0" onMouseClicked="#onActionChangeImgTwoClick" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="searchIdLabelTwo" layoutX="73.0" layoutY="107.0" text="Type a Pokemon ID" visible="false" />
+            <TextField fx:id="searchIdTextTwo" layoutX="192.0" layoutY="103.0" visible="false" />
+            <Button fx:id="searchBtnTwo" layoutX="170.0" layoutY="144.0" mnemonicParsing="false" onAction="#onActionSearchBtnTwoClick" prefHeight="25.0" prefWidth="65.0" text="OK" visible="false" />
          </children>
       </Pane>
       <Pane layoutY="442.0" prefHeight="221.0" prefWidth="397.0">
@@ -221,6 +229,9 @@
             <Label fx:id="nameLabelThree" layoutX="26.0" layoutY="17.0" prefHeight="17.0" prefWidth="198.0" />
             <Label fx:id="idLabelThree" layoutX="186.0" layoutY="17.0" />
             <ImageView fx:id="changeImgThree" fitHeight="33.0" fitWidth="33.0" layoutX="150.0" layoutY="173.0" onMouseClicked="#onActionChangeImgThreeClick" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="searchIdLabelThree" layoutX="73.0" layoutY="107.0" text="Type a Pokemon ID" visible="false" />
+            <TextField fx:id="searchIdTextThree" layoutX="192.0" layoutY="103.0" visible="false" />
+            <Button fx:id="searchBtnThree" layoutX="170.0" layoutY="144.0" mnemonicParsing="false" onAction="#onActionSearchBtnThreeClick" prefHeight="25.0" prefWidth="65.0" text="OK" visible="false" />
          </children>
       </Pane>
       <Pane layoutX="397.0" prefHeight="221.0" prefWidth="397.0">
@@ -291,6 +302,9 @@
             <Label fx:id="nameLabelFour" layoutX="26.0" layoutY="17.0" prefHeight="17.0" prefWidth="198.0" />
             <Label fx:id="idLabelFour" layoutX="186.0" layoutY="17.0" />
             <ImageView fx:id="changeImgFour" fitHeight="33.0" fitWidth="33.0" layoutX="150.0" layoutY="173.0" onMouseClicked="#onActionChangeImgFourClick" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="searchIdLabelFour" layoutX="73.0" layoutY="107.0" text="Type a Pokemon ID" visible="false" />
+            <TextField fx:id="searchIdTextFour" layoutX="192.0" layoutY="103.0" visible="false" />
+            <Button fx:id="searchBtnFour" layoutX="170.0" layoutY="144.0" mnemonicParsing="false" onAction="#onActionSearchBtnFourClick" prefHeight="25.0" prefWidth="65.0" text="OK" visible="false" />
          </children>
       </Pane>
       <Pane layoutX="397.0" layoutY="214.0" prefHeight="221.0" prefWidth="397.0">
@@ -361,6 +375,9 @@
             <Label fx:id="nameLabelFive" layoutX="26.0" layoutY="17.0" prefHeight="17.0" prefWidth="198.0" />
             <Label fx:id="idLabelFive" layoutX="186.0" layoutY="17.0" />
             <ImageView fx:id="changeImgFive" fitHeight="33.0" fitWidth="33.0" layoutX="150.0" layoutY="173.0" onMouseClicked="#onActionChangeImgFiveClick" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="searchIdLabelFive" layoutX="73.0" layoutY="107.0" text="Type a Pokemon ID" visible="false" />
+            <TextField fx:id="searchIdTextFive" layoutX="192.0" layoutY="103.0" onAction="#onActionSearchBtnFiveClick" visible="false" />
+            <Button fx:id="searchBtnFive" layoutX="170.0" layoutY="144.0" mnemonicParsing="false" onAction="#onActionSearchBtnFiveClick" prefHeight="25.0" prefWidth="65.0" text="OK" visible="false" />
          </children>
       </Pane>
       <Pane layoutX="397.0" layoutY="442.0" prefHeight="221.0" prefWidth="397.0">
@@ -431,6 +448,9 @@
             <Label fx:id="nameLabelSix" layoutX="26.0" layoutY="17.0" prefHeight="17.0" prefWidth="198.0" />
             <Label fx:id="idLabelSix" layoutX="186.0" layoutY="17.0" />
             <ImageView fx:id="changeImgSix" fitHeight="33.0" fitWidth="33.0" layoutX="150.0" layoutY="173.0" onMouseClicked="#onActionChangeImgSixClick" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="searchIdLabelSix" layoutX="73.0" layoutY="107.0" text="Type a Pokemon ID" visible="false" />
+            <TextField fx:id="searchIdTextSix" layoutX="192.0" layoutY="103.0" visible="false" />
+            <Button fx:id="searchBtnSix" layoutX="170.0" layoutY="144.0" mnemonicParsing="false" onAction="#onActionSearchBtnSixClick" prefHeight="25.0" prefWidth="65.0" text="OK" visible="false" />
          </children>
       </Pane>
    </children>
